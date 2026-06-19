@@ -1,0 +1,341 @@
+:root {
+    --fondo: #F5F0FF;
+    --barras: #745AAA;
+    --primario: #4F378A;
+    --gris-texto: #333;
+    --borde: #A38DD6;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: var(--fondo);
+    color: var(--primario);
+}
+
+/* MENU LATERAL DESPLEGABLE */
+.menu-toggle {
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    background: transparent;
+    color: white;
+    border: none;
+    padding: 10px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 18px;
+    z-index: 1000;
+    transition: transform 0.35s ease;
+}
+
+.side-menu {
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 230px;
+    height: fit-content;
+    padding: 40px 20px;
+    background: var(--fondo);
+    transition: transform 0.3s ease;
+    z-index: 999;
+    transform: translateX(100%);
+}
+
+.side-menu.open {
+    transform: translateX(0);
+}
+
+.user-box {
+    text-align: center;
+    margin-right: 50px;
+}
+
+.user-icon {
+    background: white;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    margin: auto;
+    display: grid;
+    place-items: center;
+    font-size: 32px;
+}
+
+.user-icon img {
+    width: 80px;
+    height: 80px;
+}
+
+.user-name {
+    margin-top: 10px;
+    color: var(--primario);
+    font-weight: 500;
+}
+
+.menu-options {
+    list-style: none;
+    margin-top: 40px;
+    padding: 0;
+    border-left: 2px solid var(--primario);
+    padding-left: 20px;
+}
+
+.menu-options li {
+    padding: 10px 0;
+    font-size: 17px;
+    cursor: pointer;
+    color: var(--primario);
+    transition: all 0.2s ease;
+}
+
+.menu-options li:hover {
+    text-decoration: underline;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.menu-options li.active {
+    font-weight: bold;
+    text-decoration: underline;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* BARRA INFERIOR */
+.bottom-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: var(--barras);
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    padding: 12px 0;
+    z-index: 100;
+}
+
+.bottom-bar .icon {
+    font-size: 26px;
+    color: white;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.bottom-bar .icon img {
+    width: 40px;
+    height: 40px;
+}
+
+.bottom-bar .icon .text {
+    max-width: 0;
+    opacity: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    color: white;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+.bottom-bar .icon .separator {
+    width: 0;
+    height: 30px;
+    background-color: white;
+    margin: 0 0px;
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.bottom-bar .icon:hover .text,
+.bottom-bar .icon.active .text {
+    max-width: 150px;
+    opacity: 1;
+    margin-left: 10px;
+}
+
+.bottom-bar .icon:hover .separator,
+.bottom-bar .icon.active .separator {
+    width: 2px;
+    opacity: 1;
+    margin-right: 10px;
+}
+
+/* CONTENEDOR PRINCIPAL */
+.container {
+    width: 100%;
+    max-width: 500px;
+    margin: 40px auto 120px;
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.page-title {
+    color: var(--primario);
+    font-weight: 500;
+    margin-bottom: 40px;
+    text-align: center;
+    font-size: 28px;
+}
+
+/* FORMULARIO */
+.config-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.form-grid-single {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.input-group label {
+    font-size: 13px;
+    color: var(--gris-texto);
+    font-weight: 500;
+}
+
+.form-input {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid var(--borde);
+    border-radius: 8px;
+    font-size: 15px;
+    background: white;
+    color: var(--gris-texto);
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+    font-family: inherit;
+    outline: none;
+}
+
+.form-input-readonly {
+    background-color: #dcd6eb;
+    border: 2px solid transparent;
+    color: #000;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.15);
+    letter-spacing: 2px;
+}
+
+.link-cambiar-contrasena {
+    font-size: 14px;
+    color: var(--primario);
+    text-decoration: underline;
+    margin-top: -10px;
+}
+
+.link-cambiar-contrasena:hover {
+    color: #3b286b;
+}
+
+/* MODAL CAMBIAR CONTRASEÑA */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+
+.modal-overlay.show {
+    display: flex;
+}
+
+.modal-content {
+    background-color: var(--barras);
+    width: 90%;
+    max-width: 650px;
+    padding: 40px;
+    border-radius: 12px;
+    color: white;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.modal-title {
+    margin-top: 0;
+    margin-bottom: 30px;
+    font-size: 28px;
+    font-weight: 500;
+}
+
+.modal-form {
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.modal-input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    text-align: left;
+}
+
+.modal-input-group label {
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.modal-input {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+.btn-actualizar {
+    background-color: var(--primario);
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 10px;
+    align-self: center;
+    transition: background 0.2s;
+}
+
+.btn-actualizar:hover {
+    background-color: #3b286b;
+}
+
+.link-olvido {
+    color: white;
+    font-size: 14px;
+    text-decoration: underline;
+    margin-top: 10px;
+}

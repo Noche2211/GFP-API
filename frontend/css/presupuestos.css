@@ -1,0 +1,285 @@
+/*
+ presupuestos.css
+ Propósito: Estilos para la página de presupuestos.
+ - Estilos del header, lista de presupuestos, formularios y notificaciones.
+ - Reutiliza clases de layout compartidas con otras páginas.
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+
+:root {
+    --fondo: #F5F0FF;
+    --barras: #745AAA;
+    --primario: #4F378A;
+    --verde: #57C27A;
+    --rojo: #E76A6A;
+}
+
+/* GENERAL */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: var(--fondo);
+    color: var(--primario);
+}
+
+/* BOTÓN DE DESPLIEGUE */
+.menu-toggle {
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    background: transparent;
+    color: white;
+    border: none;
+    padding: 10px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 18px;
+    z-index: 1000;
+    transition: transform 0.35s ease;
+}
+
+
+/* NOTIFICACIÓN TOAST (ÉXITO) */
+.notification-toast {
+    position: fixed;
+    bottom: 90px;
+    right: 30px;
+    background: #B8FCCA;
+    border: 1px solid #9AD9AE;
+    border-radius: 8px;
+    padding: 12px 18px;
+    width: 320px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    display: none;
+    z-index: 2000;
+    font-family: 'Inter', sans-serif;
+}
+
+.notification-toast.show {
+    display: block;
+    animation: fadeInToast 0.4s ease;
+}
+
+.notification-toast .notification-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.notification-toast .notification-text strong {
+    display: block;
+    color: #000;
+    font-size: 14px;
+    margin-bottom: 2px;
+}
+
+.notification-toast .notification-text p {
+    margin: 0;
+    color: #333;
+    font-size: 13px;
+    line-height: 1.4;
+}
+
+.notification-toast .close-icon {
+    font-size: 20px;
+    color: #000;
+    cursor: pointer;
+    opacity: 0.6;
+    margin-left: 10px;
+}
+
+.notification-toast .close-icon:hover {
+    opacity: 1;
+}
+
+@keyframes fadeInToast {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Ajustes Responsive */
+@media (max-width: 480px) {
+    .notification-toast {
+        right: 15px;
+        left: 15px;
+        width: auto;
+    }
+}
+
+/* CONTENEDOR PRINCIPAL */
+.content {
+    padding: 40px 60px;
+    margin-right: 0;
+    display: flex;
+    flex-direction: column;
+    /* align-items: center;  En movimientos no estaba centrado, pero aqui parece que el header si */
+    /* En la imagen el "+ Nuevo Presupuesto" se ve alineado a la izquierda similar a movimientos */
+}
+
+/* TITULO NUEVO PRESUPUESTO */
+.new-movement-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 40px;
+    cursor: pointer;
+    transition: opacity 0.3s;
+}
+
+.new-movement-header:hover {
+    opacity: 0.8;
+}
+
+.new-movement-header h1 {
+    font-size: 28px;
+    font-weight: 500;
+    margin: 0;
+    color: var(--primario);
+}
+
+.new-movement-header img {
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+}
+
+/* MENU LATERAL DESPLEGABLE */
+.side-menu {
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 230px;
+    height: fit-content;
+    padding: 40px 20px;
+    background: var(--fondo);
+    transition: transform 0.3s ease;
+    z-index: 999;
+    transform: translateX(100%);
+}
+
+.side-menu.open {
+    transform: translateX(0);
+}
+
+.user-box {
+    text-align: center;
+    margin-right: 50px;
+}
+
+.user-icon {
+    background: white;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    margin: auto;
+    display: grid;
+    place-items: center;
+    font-size: 32px;
+}
+
+.user-icon img {
+    width: 80px;
+    height: 80px;
+}
+
+.user-name {
+    margin-top: 10px;
+    color: var(--primario);
+    font-weight: 500;
+}
+
+.menu-options {
+    list-style: none;
+    margin-top: 40px;
+    padding: 0;
+    border-left: 2px solid var(--primario);
+    padding-left: 20px;
+}
+
+.menu-options li {
+    padding: 10px 0;
+    font-size: 17px;
+    cursor: pointer;
+    color: var(--primario);
+    transition: all 0.2s ease;
+}
+
+.menu-options li:hover {
+    text-decoration: underline;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.menu-options li.active {
+    font-weight: bold;
+    text-decoration: underline;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* BARRA INFERIOR */
+.bottom-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: var(--barras);
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    padding: 12px 0;
+}
+
+.bottom-bar .icon {
+    font-size: 26px;
+    color: white;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.bottom-bar .icon img {
+    width: 40px;
+    height: 40px;
+}
+
+.bottom-bar .icon .text {
+    max-width: 0;
+    opacity: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    color: white;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+.bottom-bar .icon .separator {
+    width: 0;
+    height: 30px;
+    background-color: white;
+    margin: 0 0px;
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.bottom-bar .icon:hover .text,
+.bottom-bar .icon.active .text {
+    max-width: 150px;
+    opacity: 1;
+    margin-left: 10px;
+}
+
+.bottom-bar .icon:hover .separator,
+.bottom-bar .icon.active .separator {
+    width: 2px;
+    opacity: 1;
+    margin-right: 10px;
+}

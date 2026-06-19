@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recuperar Contraseña - Gestor de Finanzas</title>
+        <!--
+            recuperarContrasena.html
+            Propósito: Página para solicitar enlace de recuperación de contraseña.
+            - Muestra notificación tras enviar la solicitud; lógica en `../js/recuperarContrasena.js`.
+            - Estilos en `../css/recuperarContrasena.css`.
+        -->
+    <link rel="stylesheet" href="../css/recuperarContrasena.css">
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="recovery-card">
+
+            <div class="avatar-circle">
+                <img src="../img/perfil.svg" alt="avatar">
+            </div>
+
+            <h2>¿Olvidaste tu contraseña?</h2>
+
+            <p class="description">Enviaremos un enlace temporal al correo<br>que registraste para verificar que eres tú
+                y<br>crear una nueva contraseña</p>
+
+            <form>
+                <div class="input-group">
+                    <label for="email">Correo registrado</label>
+                    <input type="email" id="email">
+                </div>
+
+                <button type="button" onclick="sendRecoveryLink()">Enviar enlace de
+                    recuperación</button>
+            </form>
+
+            <div class="links">
+                <a href="login.html" class="back-link">Volver al inicio de sesión</a>
+                <a href="crearCuenta.html" class="create-link">Crear cuenta</a>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Notificación de éxito -->
+    <div id="recoveryNotification" class="notification-toast">
+        <div class="notification-content">
+            <div class="notification-text">
+                <strong>Enviado...</strong>
+                <p>Enlace de recuperación enviado al correo que registraste</p>
+            </div>
+            <span class="close-icon" onclick="hideNotification()">×</span>
+        </div>
+    </div>
+
+    <div class="footer-bar"></div>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/recuperarContrasena.js"></script>
+
+</body>
+
+</html>

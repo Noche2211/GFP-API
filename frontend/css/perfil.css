@@ -1,0 +1,329 @@
+/*
+ perfil.css
+ Propósito: Estilos para la página de perfil.
+ - Diseña la vista de balance, tarjetas y barra de progreso.
+ - Incluye estilos específicos para la visualización de gráficos y métricas.
+*/
+
+:root {
+    --fondo: #F5F0FF;
+    --barras: #745AAA;
+    --primario: #4F378A;
+    --verde: #57C27A;
+    --rojo: #E76A6A;
+}
+
+/* GENERAL */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: var(--fondo);
+    color: var(--primario);
+}
+
+/* BOTÓN DE DESPLIEGUE */
+.menu-toggle {
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    background: transparent;
+    color: white;
+    border: none;
+    padding: 10px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 18px;
+    z-index: 1000;
+}
+
+/* CONTENEDOR PRINCIPAL */
+.content {
+    padding: 40px 60px;
+    margin-right: 0;
+}
+
+/* TITULO */
+.title-section {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 22px;
+    margin-bottom: 40px;
+}
+
+.title-section h1 {
+    font-size: 30px;
+}
+
+.title-section .icon {
+    font-size: 24px;
+}
+
+/* TARJETAS */
+.card {
+    background: white;
+    padding: 25px;
+    border-radius: 16px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.top-cards {
+    display: flex;
+    gap: 40px;
+    margin-bottom: 40px;
+}
+
+.card.small {
+    width: 380px;
+}
+
+.card.balance {
+    width: 420px;
+    text-align: center;
+}
+
+.card-row {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.green {
+    color: var(--verde);
+}
+
+.red {
+    color: var(--rojo);
+}
+
+/* PROGRESOS */
+.progress {
+    width: 48%;
+    height: 10px;
+    border-radius: 20px;
+    background: #e8e8e8;
+}
+
+.progress-fill {
+    height: 100%;
+    background: var(--verde);
+    border-radius: 20px;
+}
+
+.red-fill {
+    background: var(--rojo);
+}
+
+/* BALANCE */
+.balance-bar {
+    width: 100%;
+    height: 14px;
+    background: #ddd;
+    border-radius: 20px;
+    margin-top: 15px;
+}
+
+.balance-fill {
+    height: 100%;
+    background: var(--primario);
+    border-radius: 20px;
+}
+
+.balance-amount {
+    font-size: 24px;
+    color: black;
+}
+
+/* PROGRESO METAS */
+.bottom-card {
+    width: 380px;
+    background: white;
+    padding: 25px;
+    border-radius: 16px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.progress-bar {
+    position: relative;
+    margin-bottom: 15px;
+}
+
+.progress-track {
+    width: 90%;
+    height: 12px;
+    background: #c7b7e0;
+    border-radius: 10px;
+}
+
+.purple-fill {
+    background: var(--primario);
+    height: 12px;
+    border-radius: 10px;
+}
+
+.progress-label {
+    position: absolute;
+    right: -5px;
+    top: -5px;
+    font-weight: bold;
+    color: black;
+}
+
+.chart-placeholder img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+/* MENU LATERAL DESPLEGABLE */
+.side-menu {
+    position: fixed;
+    right: -230px;
+    /* oculto */
+    top: 0;
+    width: 230px;
+    height: fit-content;
+    padding: 40px 20px;
+    background: var(--fondo);
+    transition: 0.3s ease;
+}
+
+.side-menu.open {
+    right: 0;
+}
+
+.user-box {
+    text-align: center;
+    margin-right: 50px;
+}
+
+.user-icon {
+    background: white;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    margin: auto;
+    display: grid;
+    place-items: center;
+    font-size: 32px;
+}
+
+.user-name {
+    margin-top: 10px;
+    color: var(--primario);
+    font-weight: 500;
+}
+
+.menu-options {
+    list-style: none;
+    margin-top: 40px;
+    padding: 0;
+    border-left: 2px solid var(--primario);
+    padding-left: 20px;
+}
+
+.menu-options li {
+    padding: 10px 0;
+    font-size: 17px;
+    cursor: pointer;
+    color: var(--primario);
+    transition: all 0.2s ease;
+}
+
+.menu-options li:hover {
+    text-decoration: underline;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.menu-options li.active {
+    font-weight: bold;
+    text-decoration: underline;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* BARRA INFERIOR */
+.bottom-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: var(--barras);
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    padding: 12px 0;
+}
+
+.bottom-bar .icon {
+    font-size: 26px;
+    color: white;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.bottom-bar .icon img {
+    width: 40px;
+    height: 40px;
+}
+
+.bottom-bar .icon .text {
+    max-width: 0;
+    opacity: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    color: white;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+.bottom-bar .icon .separator {
+    width: 0;
+    height: 30px;
+    background-color: white;
+    margin: 0 0px;
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.bottom-bar .icon:hover .text,
+.bottom-bar .icon.active .text {
+    max-width: 150px;
+    opacity: 1;
+    margin-left: 10px;
+}
+
+.bottom-bar .icon:hover .separator,
+.bottom-bar .icon.active .separator {
+    width: 2px;
+    opacity: 1;
+    margin-right: 10px;
+}
+
+/* OCULTAR MENÚ COMPLETAMENTE */
+.side-menu {
+    transform: translateX(100%);
+    right: 0;
+    transition: transform 0.35s ease;
+}
+
+.side-menu.open {
+    transform: translateX(0);
+}
+
+/* ANIMACIÓN DEL BOTÓN */
+.menu-toggle {
+    transition: transform 0.35s ease;
+}
+
+.menu-toggle.rotated {
+    transform: rotate(90deg);
+}
+
+/* ICONO DEL USUARIO EN EL MENÚ */
+.user-icon img,
+.user-icon-img {
+    width: 80px;
+    height: 80px;
+}

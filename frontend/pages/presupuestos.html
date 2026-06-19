@@ -1,0 +1,80 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/presupuestos.css" />
+    <title>Presupuestos</title>
+    <!--
+        presupuestos.html
+        Propósito: Página para listar y crear presupuestos.
+        - Muestra listado de presupuestos y tiene un botón `+` para crear nuevos.
+        - Incluye `../css/presupuestos.css`, `../js/main.js` y `../js/presupuestos.js`.
+    -->
+</head>
+
+<body>
+
+    <!-- Botón para abrir el menú -->
+    <button class="menu-toggle" id="menuBtn">
+        <img src="../img/menuCerrado.svg" alt="menu" id="menuIcon" style="width: 48px; height: 48px;">
+    </button>
+
+    <!-- Menú lateral derecho -->
+    <aside class="side-menu" id="sideMenu">
+        <div class="user-box">
+            <div class="user-icon">
+                <img src="../img/login.svg" alt="icon">
+            </div>
+            <p class="user-name">Usuario</p>
+        </div>
+
+        <ul class="menu-options">
+            <li onclick="window.location.href='perfil.html'">Perfil</li>
+            <li onclick="window.location.href='movimientos.html'">Movimientos</li>
+            <li class="active">Presupuestos</li>
+            <li onclick="window.location.href='metas.html'">Metas</li>
+            <li onclick="window.location.href='reportes.html'">Reportes</li>
+            <li onclick="window.location.href='copiadeSeguridad.html'">Copia de seguridad</li>
+            <li onclick="window.location.href='configuracion.html'">Configuración</li>
+            <li onclick="window.location.href='login.html'">Cerrar Sesión</li>
+        </ul>
+    </aside>
+
+    <main class="content">
+        <div class="new-movement-header">
+            <img src="../img/iconPlus.svg" alt="Nuevo" id="newBudgetBtn">
+            <h1>Presupuestos</h1>
+        </div>
+
+    </main>
+
+    <nav class="bottom-bar">
+        <div class="icon" onclick="window.location.href='movimientos.html'">
+            <img src="../img/iconMovimiento.svg" alt="icon">
+            <span class="text">Movimiento</span>
+        </div>
+        <div class="icon" onclick="window.location.href='presupuestos.html'">
+            <span class="separator"></span>
+            <img src="../img/iconPresupuesto.svg" alt="icon">
+            <span class="text">Presupuesto</span>
+        </div>
+        <div class="icon" onclick="window.location.href='metas.html'">
+            <span class="separator"></span>
+            <img src="../img/iconMetas.svg" alt="icon">
+            <span class="text">Metas</span>
+        </div>
+        <div class="icon" onclick="window.location.href='reportes.html'">
+            <span class="separator"></span>
+            <img src="../img/iconReportes.svg" alt="icon">
+            <span class="text">Reportes</span>
+        </div>
+    </nav>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/presupuestos.js"></script>
+
+</body>
+
+</html>

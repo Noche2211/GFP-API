@@ -1,0 +1,105 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/movimientos.css" />
+    <title>Movimientos</title>
+    <!--
+        movimientos.html
+        Propósito: Página para ver y registrar movimientos (ingresos y gastos).
+        - Contiene la vista principal y una vista de selección para crear Ingreso/Gasto.
+        - Incluye `../css/movimientos.css`, `../js/main.js` y `../js/movimientos.js`.
+        - `movimientos.js` maneja el botón `+` y muestra la selección entre ingreso/gasto.
+    -->
+</head>
+
+<body>
+
+    <!-- Botón para abrir el menú -->
+    <button class="menu-toggle" id="menuBtn">
+        <img src="../img/menuCerrado.svg" alt="menu" id="menuIcon" style="width: 48px; height: 48px;">
+    </button>
+
+    <!-- Menú lateral derecho -->
+    <aside class="side-menu" id="sideMenu">
+        <div class="user-box">
+            <div class="user-icon">
+                <img src="../img/login.svg" alt="icon">
+            </div>
+            <p class="user-name">Usuario</p>
+        </div>
+
+        <ul class="menu-options">
+            <li onclick="window.location.href='perfil.html'">Perfil</li>
+            <li class="active">Movimientos</li>
+            <li onclick="window.location.href='presupuestos.html'">Presupuestos</li>
+            <li onclick="window.location.href='metas.html'">Metas</li>
+            <li onclick="window.location.href='reportes.html'">Reportes</li>
+            <li onclick="window.location.href='copiadeSeguridad.html'">Copia de seguridad</li>
+            <li onclick="window.location.href='configuracion.html'">Configuración</li>
+            <li onclick="window.location.href='login.html'">Cerrar Sesión</li>
+        </ul>
+    </aside>
+
+    <!-- Contenedor principal -->
+    <main class="content">
+        <div class="new-movement-header">
+            <img src="../img/iconPlus.svg" alt="Nuevo" id="newMovementBtn">
+            <h1>Movimientos</h1>
+        </div>
+
+        <div id="selectionView" class="selection-view" style="display:none;">
+            <div class="columns-container">
+                <div class="selection-column">
+                    <h2 class="title-igreso" onclick="window.location.href='ingreso.html'">Ingreso</h2>
+                    <ul class="info-list">
+                        <li>Separa tus ingresos por categorías si tienes distintas fuentes, por ejemplo: Salario, Ventas, Freelance, Alquileres.</li>
+                        <li>Establece una meta de ingresos que quieras alcanzar semanal o mensualmente, y haz seguimiento de tu progreso.</li>
+                        <li>Usa descripciones como: "Pago quincenal", "Ingreso por venta en línea", "Préstamo devuelto".</li>
+                    </ul>
+                </div>
+                <div class="selection-column">
+                    <h2 class="title-gasto" onclick="window.location.href='gasto.html'">Gasto</h2>
+                    <ul class="info-list">
+                        <li>Anota tus gastos diarios o mensuales, desde los más pequeños hasta los más importantes.</li>
+                        <li>Agrúpalos por categorías como: Alimentación, Transporte, Servicios, Entretenimiento, Educación, etc.</li>
+                        <li>Si sueles gastar en lo mismo cada mes, puedes marcar el gasto como "recurrente".</li>
+                    </ul>
+                </div>
+            </div>
+            <button class="back-btn" onclick="document.getElementById('selectionView').style.display='none'; document.getElementById('newMovementBtn').style.display='inline';">Volver</button>
+        </div>
+
+    </main>
+
+    <!-- Barra inferior -->
+    <nav class="bottom-bar">
+        <div class="icon" onclick="window.location.href='movimientos.html'">
+            <img src="../img/iconMovimiento.svg" alt="icon">
+            <span class="text">Movimiento</span>
+        </div>
+        <div class="icon" onclick="window.location.href='presupuestos.html'">
+            <span class="separator"></span>
+            <img src="../img/iconPresupuesto.svg" alt="icon">
+            <span class="text">Presupuesto</span>
+        </div>
+        <div class="icon" onclick="window.location.href='metas.html'">
+            <span class="separator"></span>
+            <img src="../img/iconMetas.svg" alt="icon">
+            <span class="text">Metas</span>
+        </div>
+        <div class="icon" onclick="window.location.href='reportes.html'">
+            <span class="separator"></span>
+            <img src="../img/iconReportes.svg" alt="icon">
+            <span class="text">Reportes</span>
+        </div>
+    </nav>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/movimientos.js"></script>
+
+</body>
+
+</html>

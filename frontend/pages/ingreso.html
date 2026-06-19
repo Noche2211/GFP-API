@@ -1,0 +1,137 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/ingreso.css" />
+    <title>Ingreso</title>
+    <!--
+        ingreso.html
+        Propósito: Formulario para registrar un ingreso.
+        - Formatea montos y gestiona inputs; usa `../js/ingreso.js`.
+        - Estilos en `../css/ingreso.css`.
+    -->
+</head>
+
+<body>
+
+    <!-- Botón para abrir el menú -->
+    <button class="menu-toggle" id="menuBtn">
+        <img src="../img/menuCerrado.svg" alt="menu" id="menuIcon" style="width: 48px; height: 48px;">
+    </button>
+
+    <!-- Menú lateral derecho -->
+    <aside class="side-menu" id="sideMenu">
+        <div class="user-box">
+            <div class="user-icon">
+                <img src="../img/login.svg" alt="icon">
+            </div>
+            <p class="user-name">Usuario</p>
+        </div>
+
+        <ul class="menu-options">
+            <li onclick="window.location.href='perfil.html'">Perfil</li>
+            <li class="active" onclick="window.location.href='movimientos.html'">Movimientos</li>
+            <li onclick="window.location.href='presupuestos.html'">Presupuestos</li>
+            <li onclick="window.location.href='metas.html'">Metas</li>
+            <li onclick="window.location.href='reportes.html'">Reportes</li>
+            <li onclick="window.location.href='copiadeSeguridad.html'">Copia de seguridad</li>
+            <li onclick="window.location.href='configuracion.html'">Configuración</li>
+            <li onclick="window.location.href='login.html'">Cerrar Sesión</li>
+        </ul>
+    </aside>
+
+    <!-- Contenedor principal -->
+    <main class="content">
+
+        <h1 class="page-title">Ingreso</h1>
+
+        <form class="ingreso-form">
+
+            <div class="form-group">
+                <label>Monto</label>
+                <div class="input-wrapper">
+                    <input type="text" id="montoInput" class="form-input" placeholder="0,00">
+                    <span class="input-icon">$</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Fecha</label>
+                <div class="input-wrapper">
+                    <input type="date" id="fechaInput" class="form-input">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Categoria</label>
+                <div class="input-wrapper" style="display: flex; flex-direction: column; gap: 10px;">
+                    <select class="form-input" id="categoriaSelect">
+                        <option value="" disabled selected hidden>Seleccionar...</option>
+                        <option value="trabajo">Trabajo</option>
+                        <option value="ventas">Ventas</option>
+                        <option value="freelance">Freelance</option>
+                        <option value="personalizada">Personalizada</option>
+                    </select>
+                    <!-- Input oculto para la categoría personalizada -->
+                    <input type="text" id="categoriaPersonalizadaInput" class="form-input"
+                        placeholder="Escribe tu categoría" style="display: none;">
+                </div>
+            </div>
+
+            <div class="form-group" style="align-items: flex-start;">
+                <label style="margin-top: 10px;">Descripcion</label>
+                <textarea class="textarea-input" maxlength="80" placeholder="Máximo 80 caracteres"></textarea>
+            </div>
+
+            <div class="form-actions">
+                <button type="button" class="btn-guardar" onclick="validarFecha()">Guardar</button>
+                <button type="button" class="btn-volver-form"
+                    onclick="window.location.href='movimientos.html?view=selection'">Volver</button>
+            </div>
+
+        </form>
+
+    </main>
+
+    <!-- Notificación de Error de Fecha -->
+    <div id="errorNotification" class="notification-error">
+        <div class="notification-content">
+            <div class="notification-text">
+                <strong>Fecha establecida incorrecta</strong>
+                <p>La fecha introducida esta fuera del rango que corresponde</p>
+            </div>
+            <span class="close-icon" onclick="hideError()">×</span>
+        </div>
+    </div>
+
+    <!-- Barra inferior -->
+    <nav class="bottom-bar">
+        <div class="icon" onclick="window.location.href='movimientos.html'">
+            <img src="../img/iconMovimiento.svg" alt="icon">
+            <span class="text">Movimiento</span>
+        </div>
+        <div class="icon" onclick="window.location.href='presupuestos.html'">
+            <span class="separator"></span>
+            <img src="../img/iconPresupuesto.svg" alt="icon">
+            <span class="text">Presupuesto</span>
+        </div>
+        <div class="icon" onclick="window.location.href='metas.html'">
+            <span class="separator"></span>
+            <img src="../img/iconMetas.svg" alt="icon">
+            <span class="text">Metas</span>
+        </div>
+        <div class="icon" onclick="window.location.href='reportes.html'">
+            <span class="separator"></span>
+            <img src="../img/iconReportes.svg" alt="icon">
+            <span class="text">Reportes</span>
+        </div>
+    </nav>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/ingreso.js"></script>
+
+</body>
+
+</html>

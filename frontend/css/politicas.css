@@ -1,0 +1,159 @@
+/*
+ politicas.css
+ Propósito: Estilos para las páginas legales (políticas y términos).
+ - Diseña layouts de textos largos y añade espaciado/legibilidad para documentos legales.
+*/
+
+/* Colores base */
+:root {
+    --bg-light: #F5F0FF;
+    /* Fondo */
+    --barras: #745AAA;
+    /* Barra y botón */
+    --titulos: #664CA3;
+    /* Color de los títulos */
+    --texto: #4F3889;
+    /* Color del texto */
+    --btn-hover: #5B438B;
+    /* Color del botón hover */
+}
+
+/* Base */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: var(--bg-light);
+    color: var(--texto);
+    position: relative;
+    min-height: 100vh;
+}
+
+/* Contenedor principal */
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 30px 20px 100px 20px;
+    /* Padding bottom para el botón y barra */
+    text-align: center;
+    position: relative;
+    min-height: calc(100vh - 150px);
+}
+
+.container-terminos {
+    max-width: 1200px;
+}
+
+/* Títulos */
+.titulo-pagina {
+    text-align: center;
+    color: var(--titulos);
+    font-size: 18px;
+    /* Más grande */
+    margin-bottom: 30px;
+    line-height: 1.4;
+    font-weight: bold;
+}
+
+.subtitulo-pagina {
+    font-size: 16px;
+    font-weight: normal;
+}
+
+/* Estructura de columnas para políticas */
+.contenido-texto {
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+    font-size: 14px;
+    /* Fuente aún mayor y cómoda de leer */
+    line-height: 1.5;
+    letter-spacing: 0.2px;
+    text-align: left;
+}
+
+.columna {
+    flex: 1;
+}
+
+.columna-unica {
+    flex: 1;
+}
+
+/* Textos y Listas */
+.parrafo {
+    margin-bottom: 6px;
+    margin-top: 20px;
+    /* Separación cómoda */
+}
+
+/* Negritas como los títulos de ítems */
+.parrafo strong {
+    font-weight: 600;
+}
+
+.parrafo-continuacion {
+    margin: 2px 0;
+}
+
+.parrafo-pie {
+    margin-top: 2px;
+}
+
+.lista {
+    margin: 4px 0 12px 0;
+    padding-left: 20px;
+}
+
+.lista-continuacion {
+    margin: 0 0 12px 0;
+    padding-left: 20px;
+}
+
+.lista li,
+.lista-continuacion li {
+    margin-bottom: 4px;
+}
+
+/* Botón Volver */
+.boton-contenedor {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+    padding-bottom: 30px;
+}
+
+.btn-volver {
+    background-color: var(--barras);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 12px 50px;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.btn-volver:hover {
+    background-color: var(--btn-hover);
+}
+
+/* Barra inferior */
+.footer-bar {
+    background: var(--barras);
+    height: 70px;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 10;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .contenido-texto {
+        flex-direction: column;
+        gap: 0;
+    }
+}

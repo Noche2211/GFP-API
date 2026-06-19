@@ -1,0 +1,170 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/copiadeSeguridad.css" />
+    <title>Copia de Seguridad</title>
+    <!--
+        copiadeSeguridad.html
+        Propósito: Permite generar y descargar copias de seguridad de datos.
+        - Incluye botones que llaman a `../js/copiadeSeguridad.js` para mostrar notificaciones.
+        - Estilos en `../css/copiadeSeguridad.css`.
+    -->
+</head>
+
+<body>
+
+    <!-- Botón para abrir el menú -->
+    <button class="menu-toggle" id="menuBtn">
+        <img src="../img/menuCerrado.svg" alt="menu" id="menuIcon" style="width: 48px; height: 48px;">
+    </button>
+
+    <!-- Menú lateral derecho -->
+    <aside class="side-menu" id="sideMenu">
+        <div class="user-box">
+            <div class="user-icon">
+                <img src="../img/login.svg" alt="icon">
+            </div>
+            <p class="user-name">Usuario</p>
+        </div>
+
+        <ul class="menu-options">
+            <li onclick="window.location.href='perfil.html'">Perfil</li>
+            <li onclick="window.location.href='movimientos.html'">Movimientos</li>
+            <li onclick="window.location.href='presupuestos.html'">Presupuestos</li>
+            <li onclick="window.location.href='metas.html'">Metas</li>
+            <li onclick="window.location.href='reportes.html'">Reportes</li>
+
+            <li class="active">Copia de seguridad</li>
+
+            <li onclick="window.location.href='configuracion.html'">Configuración</li>
+            <li onclick="window.location.href='login.html'">Cerrar Sesión</li>
+        </ul>
+    </aside>
+
+    <!-- Contenedor principal -->
+    <main class="content">
+        <div class="backup-header" onclick="generateBackup()">
+            <svg class="backup-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M19 18a3.5 3.5 0 0 0 0-7h-1.26A8 8 0 1 0 3 16.3"></path>
+                <polyline points="12 15 12 21"></polyline>
+                <polyline points="9 18 12 21 15 18"></polyline>
+            </svg>
+            <h1>Generar copia de seguridad</h1>
+        </div>
+
+        <!-- Notification de Carga (Generar) -->
+        <div class="notification" id="backupNotification">
+            <div class="notification-content">
+                <svg class="spinner" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 12a9 9 0 1 1-6.219-8.56"></path>
+                </svg>
+                <div class="notification-text">
+                    <div class="notification-title">Generando copia de seguridad</div>
+                    <div class="notification-subtitle">Se están cargando automáticamente sus reportes</div>
+                </div>
+                <button class="notification-close" onclick="closeNotification()">×</button>
+            </div>
+        </div>
+
+        <!-- Notification de Descarga -->
+        <div class="notification-download" id="downloadNotification">
+            <div class="notification-content">
+                <div class="notification-text">
+                    <div class="notification-title">Descargando copia de seguridad</div>
+                    <div class="notification-subtitle" id="downloadText">La copia de seguridad esta en proceso de
+                        descarga</div>
+                </div>
+                <button class="notification-close" onclick="closeDownloadNotification()">×</button>
+            </div>
+        </div>
+
+        <div class="history-section">
+            <h2 class="history-title">Historial</h2>
+
+            <div class="backup-list">
+                <div class="backup-item">
+                    <div class="backup-info">
+                        <span class="backup-name">Copia de seguridad 01</span>
+                        <div class="backup-date">
+                            <input type="date" value="2025-05-01" readonly>
+                        </div>
+                    </div>
+                    <button class="download-btn" onclick="downloadBackup(1)">
+                        <svg class="download-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M3 17v3a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-3"></path>
+                            <polyline points="8 12 12 16 16 12"></polyline>
+                            <line x1="12" y1="2" x2="12" y2="16"></line>
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="backup-item">
+                    <div class="backup-info">
+                        <span class="backup-name">Copia de seguridad 02</span>
+                        <div class="backup-date">
+                            <input type="date" value="2025-06-25" readonly>
+                        </div>
+                    </div>
+                    <button class="download-btn" onclick="downloadBackup(2)">
+                        <svg class="download-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M3 17v3a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-3"></path>
+                            <polyline points="8 12 12 16 16 12"></polyline>
+                            <line x1="12" y1="2" x2="12" y2="16"></line>
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="backup-item">
+                    <div class="backup-info">
+                        <span class="backup-name">Copia de seguridad 03</span>
+                        <div class="backup-date">
+                            <input type="date" value="2025-07-01" readonly>
+                        </div>
+                    </div>
+                    <button class="download-btn" onclick="downloadBackup(3)">
+                        <svg class="download-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M3 17v3a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-3"></path>
+                            <polyline points="8 12 12 16 16 12"></polyline>
+                            <line x1="12" y1="2" x2="12" y2="16"></line>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Barra inferior -->
+    <nav class="bottom-bar">
+        <div class="icon" onclick="window.location.href='movimientos.html'">
+            <img src="../img/iconMovimiento.svg" alt="icon">
+            <span class="text">Movimiento</span>
+        </div>
+        <div class="icon" onclick="window.location.href='presupuestos.html'">
+            <span class="separator"></span>
+            <img src="../img/iconPresupuesto.svg" alt="icon">
+            <span class="text">Presupuesto</span>
+        </div>
+        <div class="icon" onclick="window.location.href='metas.html'">
+            <span class="separator"></span>
+            <img src="../img/iconMetas.svg" alt="icon">
+            <span class="text">Metas</span>
+        </div>
+        <div class="icon" onclick="window.location.href='reportes.html'">
+            <span class="separator"></span>
+            <img src="../img/iconReportes.svg" alt="icon">
+            <span class="text">Reportes</span>
+        </div>
+    </nav>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/copiadeSeguridad.js"></script>
+</body>
+
+</html>

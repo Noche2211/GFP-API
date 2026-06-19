@@ -1,0 +1,224 @@
+:/*
+ recuperarContrasena.css
+ Propósito: Estilos para la página de recuperación de contraseña.
+ - Contiene layout centrado, tarjeta de recuperación y estilos de notificaciones.
+*/
+
+/* Colores base */
+:root {
+    --bg-light: #F5F0FF;
+    /* Fondo */
+    --bar: #745AAA;
+    /* Barras */
+    --button: #7A63B4;
+    /* Botón principal */
+    --text-dark: #1D1B20;
+    --border: #E8E8E8;
+    /* Borde input */
+}
+
+/* Fondo completo */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: var(--bg-light);
+}
+
+/* Contenedor principal */
+.container {
+    height: calc(100vh - 70px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Tarjeta de recuperación */
+.recovery-card {
+    text-align: center;
+    width: 320px;
+}
+
+/* Avatar circle */
+.avatar-circle {
+    width: 130px;
+    height: 130px;
+    background-color: #EFE6FF;
+    /* Circulo lila clarito */
+    border-radius: 50%;
+    margin: 0 auto 15px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.avatar-circle img {
+    width: 85px;
+    height: 85px;
+}
+
+/* Título */
+h2 {
+    margin: 0 0 10px 0;
+    color: #111;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+/* Descripción */
+.description {
+    font-size: 11px;
+    color: #828282;
+    line-height: 1.4;
+    margin: 0 0 25px 0;
+}
+
+/* Form */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+label {
+    text-align: center;
+    font-size: 13px;
+    color: #222;
+}
+
+input {
+    padding: 10px 15px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    background: white;
+    outline: none;
+    font-size: 14px;
+    color: #555;
+}
+
+/* Botón */
+button {
+    background: var(--button);
+    border: none;
+    padding: 10px;
+    border-radius: 6px;
+    color: white;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #6D56A3;
+}
+
+/* Enlaces */
+.links {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.back-link,
+.create-link {
+    color: #55418F;
+    font-size: 14px;
+    text-decoration: none;
+}
+
+.back-link:hover,
+.create-link:hover {
+    text-decoration: underline;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+
+/* Barra inferior */
+.footer-bar {
+    background: var(--bar);
+    height: 70px;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+}
+
+/* Notificación Toast */
+.notification-toast {
+    position: fixed;
+    bottom: 90px;
+    right: 30px;
+    background: #B8FCCA;
+    border: 1px solid #9AD9AE;
+    border-radius: 8px;
+    padding: 12px 18px;
+    width: 280px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    display: none;
+    z-index: 1000;
+    font-family: 'Inter', sans-serif;
+    text-align: left;
+}
+
+.notification-toast.show {
+    display: block;
+    animation: fadeIn 0.3s ease;
+}
+
+.notification-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.notification-text strong {
+    display: block;
+    color: #000;
+    font-size: 14px;
+    margin-bottom: 2px;
+}
+
+.notification-text p {
+    margin: 0;
+    color: #000;
+    font-size: 13px;
+    line-height: 1.4;
+}
+
+.close-icon {
+    font-size: 20px;
+    color: #000;
+    cursor: pointer;
+    opacity: 0.5;
+    margin-left: 10px;
+}
+
+.close-icon:hover {
+    opacity: 0.8;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+    .notification-toast {
+        right: 15px;
+        left: 15px;
+        width: auto;
+    }
+}

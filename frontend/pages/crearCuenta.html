@@ -1,0 +1,111 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Cuenta</title>
+    <!--
+        crearCuenta.html
+        Propósito: Página de registro de usuario.
+        - Formulario de creación de cuenta con validaciones en cliente (si aplica).
+        - Estilos en `../css/crearCuentaStyle.css`.
+    -->
+    <link rel="stylesheet" href="../css/crearCuentaStyle.css">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="avatar">
+            <img src="../img/login.svg" alt="avatar">
+        </div>
+
+        <h2 class="titulo">Crear cuenta</h2>
+
+        <form class="formulario">
+
+            <!-- FILA 1 -->
+            <div class="fila fila-separada">
+                <div class="campo">
+                    <label>Nombre</label>
+                    <input id="nameInput" type="text">
+                </div>
+
+                <div class="campo">
+                    <label>Apellido</label>
+                    <input id="lastNameInput" type="text">
+                </div>
+            </div>
+
+            <!-- FILA 2 -->
+            <div class="fila fila-separada">
+                <div class="campo">
+                    <label>Fecha de Nacimiento</label>
+                    <input type="date">
+                </div>
+
+                <div class="campo">
+                    <label>Género</label>
+                    <select>
+                        <option value="" disabled selected hidden>Seleccione</option>
+                        <option value="masculino">Masculino</option>
+                        <option value="femenino">Femenino</option>
+                        <option value="otro">Otro</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="campo">
+                <label>Correo</label>
+                <input id="emailInput" type="email" placeholder="usuario@example.com">
+            </div>
+
+            <div class="campo">
+                <label>Contraseña</label>
+                <input id="passwordInput" type="password" placeholder="••••••••">
+            </div>
+
+            <div id="registerMessage" class="message"></div>
+
+            <!-- PRIVACIDAD -->
+            <div class="switch-section">
+                <div>
+                    <p class="texto-principal">Acepto las políticas de privacidad</p>
+                    <a href="politicasPrivacidad.html" class="texto-secundario link-politicas">Ver políticas de
+                        privacidad</a>
+                </div>
+
+                <label class="switch">
+                    <input type="checkbox">
+                    <span class="slider"></span>
+                </label>
+            </div>
+
+            <!-- TÉRMINOS -->
+            <div class="switch-section">
+                <div>
+                    <p class="texto-principal">Acepto los términos y condiciones</p>
+                    <a href="terminosCondiciones.html" class="texto-secundario link-politicas">Ver términos y
+                        condiciones</a>
+                </div>
+
+                <label class="switch">
+                    <input type="checkbox">
+                    <span class="slider"></span>
+                </label>
+            </div>
+
+            <button type="button" class="btn" onclick="registerUser()">Registrarse</button>
+
+        </form>
+
+    </div>
+
+    <div class="footer-bar"></div>
+
+    <script src="../js/login.js"></script>
+</body>
+
+</html>

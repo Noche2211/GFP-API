@@ -1,0 +1,222 @@
+/*
+ crearCuentaStyle.css
+ Propósito: Estilos para la página de creación de cuenta.
+ - Define layout de formulario, avatar y comportamiento responsivo del formulario de registro.
+*/
+
+:root {
+    --fondo: #F5F0FF;
+    --barras: #745AAA;
+    --primario: #4F378A;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--fondo);
+    font-family: Arial, Helvetica, sans-serif;
+    color: var(--primario);
+    height: 100vh;
+    overflow: hidden;
+    /* ← Evitar scroll */
+}
+
+/* CONTENEDOR */
+.container {
+    width: 90%;
+    max-width: 480px;
+    margin: 10px auto;
+    text-align: center;
+}
+
+/* ICONO DE USUARIO */
+.avatar img {
+    width: 65px;
+    /* ← Más pequeño para ganar espacio */
+    height: auto;
+}
+
+.titulo {
+    margin-top: 5px;
+    margin-bottom: 12px;
+    font-size: 20px;
+    color: var(--primario);
+}
+
+/* FORMULARIO */
+.formulario {
+    text-align: left;
+}
+
+/* Fila con inputs alineados correctamente */
+.fila {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    /* ← Alinea los campos para que Género no quede torcido */
+    gap: 10px;
+}
+
+.fila-separada {
+    margin-bottom: 12px;
+}
+
+.campo {
+    flex: 1;
+    min-width: 0;
+    margin-bottom: 15px;
+    /* ← Separa correo y contraseña */
+}
+
+label {
+    font-size: 13px;
+    margin-bottom: 3px;
+    display: block;
+}
+
+/* INPUTS Y SELECT DEL MISMO TAMAÑO */
+input[type="text"],
+input[type="date"],
+input[type="email"],
+input[type="password"],
+select {
+    width: 100%;
+    /* ← Todos del mismo ancho */
+    padding: 8px;
+    /* ← Más estrecho */
+    border: 2px solid var(--barras);
+    border-radius: 8px;
+    font-size: 14px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    color: var(--primario);
+    box-sizing: border-box;
+}
+
+select {
+    background-color: white;
+    padding-right: 35px;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' fill='%234F378A'%3E%3Cpath d='M7 10l5 5 5-5H7z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+}
+
+/* TEXTOS */
+.texto-principal {
+    font-size: 13px;
+    margin: 0;
+    color: var(--primario);
+}
+
+.texto-secundario {
+    font-size: 11px;
+    margin: 0;
+    margin-top: 2px;
+    color: #6d6d6d;
+}
+
+.link-politicas {
+    display: block;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.link-politicas:hover {
+    text-decoration: underline;
+    color: var(--barras);
+}
+
+/* SWITCHES */
+.switch-section {
+    margin: 10px 0;
+    /* ← Menos espacio */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 42px;
+    height: 22px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #aaa;
+    border-radius: 34px;
+    transition: .3s;
+}
+
+.slider:before {
+    content: "";
+    position: absolute;
+    height: 16px;
+    width: 16px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    border-radius: 50%;
+    transition: .3s;
+}
+
+input:checked+.slider {
+    background-color: var(--primario);
+}
+
+input:checked+.slider:before {
+    transform: translateX(20px);
+}
+
+/* BOTÓN */
+.btn {
+    width: 100%;
+    padding: 10px;
+    background-color: var(--primario);
+    color: white;
+    font-size: 15px;
+    border: none;
+    border-radius: 8px;
+    margin-top: 15px;
+    /* ← Menos espacio para el borde inferior */
+    cursor: pointer;
+    font-weight: bold;
+    box-shadow: 0 4px 6px rgba(233, 167, 253, 0.2);
+}
+
+.btn:hover {
+    background-color: #3e2c6a;
+}
+
+/* Foco inputs */
+input:focus,
+select:focus {
+    outline: none;
+    border-color: var(--primario);
+    box-shadow: 0 0 5px var(--primario);
+}
+
+/* Barra inferior */
+.footer-bar {
+    background: var(--barras);
+    height: 70px;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 10;
+}

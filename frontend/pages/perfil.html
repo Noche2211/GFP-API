@@ -1,0 +1,139 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/perfil.css" />
+    <title>Perfil</title>
+    <!--
+        perfil.html
+        Propósito: Página de perfil y resumen financiero del usuario.
+        - Muestra balances, progreso de metas y una gráfica (usa `../img/perfil.svg`).
+        - Incluye `../css/perfil.css` y `../js/main.js`.
+    -->
+</head>
+
+<body>
+
+    <!-- Botón para abrir el menú -->
+    <button class="menu-toggle" id="menuBtn">
+        <img src="../img/menuCerrado.svg" alt="menu" id="menuIcon" style="width: 48px; height: 48px;">
+    </button>
+
+    <!-- Menú lateral derecho -->
+    <aside class="side-menu" id="sideMenu">
+        <div class="user-box">
+            <div class="user-icon">
+                <img src="../img/login.svg" alt="icon">
+            </div>
+            <p id="profileUserName" class="user-name">Usuario</p>
+            <p id="profileUserEmail" class="profile-email"></p>
+        </div>
+
+        <ul class="menu-options">
+            <li class="active">Perfil</li>
+            <li onclick="window.location.href='movimientos.html'">Movimientos</li>
+            <li onclick="window.location.href='presupuestos.html'">Presupuestos</li>
+            <li onclick="window.location.href='metas.html'">Metas</li>
+            <li onclick="window.location.href='reportes.html'">Reportes</li>
+
+            <li onclick="window.location.href='copiadeSeguridad.html'">Copia de seguridad</li>
+
+            <li onclick="window.location.href='configuracion.html'">Configuración</li>
+            <li onclick="window.location.href='login.html'">Cerrar Sesión</li>
+        </ul>
+    </aside>
+
+    <!-- Contenedor principal -->
+    <main class="content">
+
+        <!-- Título -->
+        <div class="title-section">
+            <span class="icon">
+                <img src="../img/perfil.svg" alt="icon">
+            </span>
+            <h1>Perfil</h1>
+        </div>
+
+        <!-- Tarjetas superiores -->
+        <div class="top-cards">
+            <!-- Ingresos / Gastos -->
+            <div class="card small">
+                <div class="card-row">
+                    <div>
+                        <h4>Total de Ingresos</h4>
+                        <p class="green">3.000.000,00</p>
+                    </div>
+                    <div>
+                        <h4>Total de Gastos</h4>
+                        <p class="red">300.000,00</p>
+                    </div>
+                </div>
+                <div class="card-row">
+                    <div class="progress green-bg">
+                        <div class="progress-fill" style="width:80%"></div>
+                    </div>
+                    <div class="progress red-bg">
+                        <div class="progress-fill red-fill" style="width:10%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Balance General -->
+            <div class="card balance">
+                <h3>Balance General</h3>
+                <p class="balance-amount">2.700.000,00</p>
+                <div class="balance-bar">
+                    <div class="balance-fill" style="width:75%"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Progreso de Metas -->
+        <div class="bottom-card">
+            <h3>Progreso de Metas</h3>
+
+            <div class="progress-bar">
+                <div class="progress-track">
+                    <div class="purple-fill" style="width:65%"></div>
+                </div>
+                <span class="progress-label">65%</span>
+            </div>
+
+            <div class="chart-placeholder">
+                <img src="../img/perfil.svg" alt="Gráfica de metas" />
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Barra inferior -->
+    <nav class="bottom-bar">
+        <div class="icon" onclick="window.location.href='movimientos.html'">
+            <img src="../img/iconMovimiento.svg" alt="icon">
+            <span class="text">Movimiento</span>
+        </div>
+        <div class="icon" onclick="window.location.href='presupuestos.html'">
+            <span class="separator"></span>
+            <img src="../img/iconPresupuesto.svg" alt="icon">
+            <span class="text">Presupuesto</span>
+        </div>
+        <div class="icon" onclick="window.location.href='metas.html'">
+            <span class="separator"></span>
+            <img src="../img/iconMetas.svg" alt="icon">
+            <span class="text">Metas</span>
+        </div>
+        <div class="icon" onclick="window.location.href='reportes.html'">
+            <span class="separator"></span>
+            <img src="../img/iconReportes.svg" alt="icon">
+            <span class="text">Reportes</span>
+        </div>
+    </nav>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/login.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,95 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/metas.css" />
+    <title>Metas</title>
+    <!--
+        metas.html
+        Propósito: Página que muestra metas de ahorro y su progreso.
+        - Contiene tarjetas de metas, progreso y notificaciones de éxito (`?success=goal`).
+        - Incluye `../css/metas.css`, `../js/main.js` y `../js/metas.js`.
+    -->
+</head>
+
+<body>
+
+    <!-- Botón para abrir el menú -->
+    <button class="menu-toggle" id="menuBtn">
+        <img src="../img/menuCerrado.svg" alt="menu" id="menuIcon" style="width: 48px; height: 48px;">
+    </button>
+
+    <!-- Menú lateral derecho -->
+    <aside class="side-menu" id="sideMenu">
+        <div class="user-box">
+            <div class="user-icon">
+                <img src="../img/login.svg" alt="icon">
+            </div>
+            <p class="user-name">Usuario</p>
+        </div>
+
+        <ul class="menu-options">
+            <li onclick="window.location.href='perfil.html'">Perfil</li>
+            <li onclick="window.location.href='movimientos.html'">Movimientos</li>
+            <li onclick="window.location.href='presupuestos.html'">Presupuestos</li>
+            <li class="active">Metas</li>
+            <li onclick="window.location.href='reportes.html'">Reportes</li>
+            <li onclick="window.location.href='copiadeSeguridad.html'">Copia de seguridad</li>
+            <li onclick="window.location.href='configuracion.html'">Configuración</li>
+            <li onclick="window.location.href='login.html'">Cerrar Sesión</li>
+        </ul>
+    </aside>
+
+    <!-- Contenedor principal -->
+    <main class="content">
+
+        <!-- Título Nueva Meta -->
+        <div class="new-movement-header" id="newGoalBtn" onclick="window.location.href='crearMeta.html'">
+            <img src="../img/iconPlus.svg" alt="plus">
+            <h1>Nueva meta</h1>
+        </div>
+
+    </main>
+
+    <!-- Notificación de éxito -->
+    <div id="successNotification" class="notification-toast">
+        <div class="notification-content">
+            <div class="notification-text">
+                <strong>Meta agregada</strong>
+                <p>Ahora puedes visualizarla en el historial</p>
+            </div>
+            <span class="close-icon" onclick="hideNotification()">×</span>
+        </div>
+    </div>
+
+    <!-- Barra inferior -->
+    <nav class="bottom-bar">
+        <div class="icon" onclick="window.location.href='movimientos.html'">
+            <img src="../img/iconMovimiento.svg" alt="icon">
+            <span class="text">Movimiento</span>
+        </div>
+        <div class="icon" onclick="window.location.href='presupuestos.html'">
+            <span class="separator"></span>
+            <img src="../img/iconPresupuesto.svg" alt="icon">
+            <span class="text">Presupuesto</span>
+        </div>
+        <div class="icon" onclick="window.location.href='metas.html'">
+            <span class="separator"></span>
+            <img src="../img/iconMetas.svg" alt="icon">
+            <span class="text">Metas</span>
+        </div>
+        <div class="icon" onclick="window.location.href='reportes.html'">
+            <span class="separator"></span>
+            <img src="../img/iconReportes.svg" alt="icon">
+            <span class="text">Reportes</span>
+        </div>
+    </nav>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/metas.js"></script>
+
+</body>
+
+</html>

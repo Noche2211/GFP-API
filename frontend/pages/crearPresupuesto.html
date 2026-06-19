@@ -1,0 +1,194 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/crearPresupuesto.css" />
+    <title>Crear Presupuesto</title>
+    <!--
+        crearPresupuesto.html
+        Propósito: Formulario para crear un nuevo presupuesto.
+        - Incluye lógica de campos personalizados y validación en `../js/crearPresupuesto.js`.
+        - Estilos en `../css/crearPresupuesto.css`.
+    -->
+</head>
+
+<body>
+
+    <!-- Botón para abrir el menú -->
+    <button class="menu-toggle" id="menuBtn">
+        <img src="../img/menuCerrado.svg" alt="menu" id="menuIcon" style="width: 48px; height: 48px;">
+    </button>
+
+    <!-- Menú lateral derecho -->
+    <aside class="side-menu" id="sideMenu">
+        <div class="user-box">
+            <div class="user-icon">
+                <img src="../img/login.svg" alt="icon">
+            </div>
+            <p class="user-name">Usuario</p>
+        </div>
+
+        <ul class="menu-options">
+            <li onclick="window.location.href='perfil.html'">Perfil</li>
+            <li onclick="window.location.href='movimientos.html'">Movimientos</li>
+            <li class="active" onclick="window.location.href='presupuestos.html'">Presupuestos</li>
+            <li onclick="window.location.href='metas.html'">Metas</li>
+            <li onclick="window.location.href='reportes.html'">Reportes</li>
+            <li onclick="window.location.href='copiadeSeguridad.html'">Copia de seguridad</li>
+            <li onclick="window.location.href='configuracion.html'">Configuración</li>
+            <li onclick="window.location.href='login.html'">Cerrar Sesión</li>
+        </ul>
+    </aside>
+
+    <!-- Contenedor principal -->
+    <div class="container">
+        <h1>Presupuesto</h1>
+
+        <form class="budget-form">
+            <div class="form-group">
+                <label for="nombre">Nombre</label>
+                <div class="input-wrapper">
+                    <input type="text" id="nombre" value="">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="monto">Monto</label>
+                <div class="input-wrapper">
+                    <span class="currency-symbol">$</span>
+                    <input type="text" id="montoInput" value="" style="text-align: right; padding-right: 35px;"
+                        placeholder="0,00">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="periodo">Periodo</label>
+                <div class="input-wrapper" style="position: relative;">
+                    <select id="periodo" required>
+                        <option value="" disabled selected hidden>Seleccionar</option>
+                        <option value="Semanal">Semanal</option>
+                        <option value="Quincenal">Quincenal</option>
+                        <option value="Mensual">Mensual</option>
+                        <option value="Anual">Anual</option>
+                        <option value="Personalizado">Personalizado</option>
+                    </select>
+                    <!-- Contenedor fechas personalizadas absolutizado -->
+                    <div id="periodoPersonalizadoContainer"
+                        style="display: none; position: absolute; left: calc(100% + 15px); top: 50%; transform: translateY(-50%); align-items: center; gap: 8px; white-space: nowrap; z-index: 5;">
+                        <span style="font-size: 13px; color: #555;">De</span>
+                        <input type="date" id="fechaInicio" class="date-input"
+                            style="width: 125px; border: 1px solid #ccc; border-radius: 8px; padding: 6px 8px; font-size: 13px;">
+                        <span style="font-size: 13px; color: #555;">a</span>
+                        <input type="date" id="fechaFin" class="date-input"
+                            style="width: 125px; border: 1px solid #ccc; border-radius: 8px; padding: 6px 8px; font-size: 13px;">
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="categoria">Categoria</label>
+                <div class="input-wrapper" style="position: relative;">
+                    <select id="categoria" required>
+                        <option value="" disabled selected hidden>Seleccionar</option>
+                        <option value="Servicios">Servicios</option>
+                        <option value="Alimentacion">Alimentación</option>
+                        <option value="Transporte">Transporte</option>
+                        <option value="Personalizada">Personalizada</option>
+                    </select>
+                    <!-- Input oculto para la categoría personalizada absolutizado -->
+                    <input type="text" id="categoriaPersonalizadaInput" placeholder=""
+                        style="display: none; position: absolute; left: calc(100% + 15px); top: 50%; transform: translateY(-50%); width: 160px; border: 1px solid #ccc; border-radius: 8px; padding: 10px 15px; z-index: 5;">
+                </div>
+            </div>
+
+            <div class="form-group form-group-description" style="align-items: flex-start;">
+                <label for="descripcion" style="margin-top: 10px;">Descripcion</label>
+                <div class="input-wrapper" style="max-width: 100%;">
+                    <textarea id="descripcion" maxlength="80" placeholder="Máximo 80 caracteres"></textarea>
+                </div>
+            </div>
+
+            <!-- NOTIFICACIONES -->
+            <div class="notifications-section">
+                <div class="bell-icon">
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M12 22C13.1 22 14 21.1 14 20H10C10 21.1 10.9 22 12 22ZM18 16V11C18 7.93 16.36 5.36 13.5 4.68V4C13.5 3.17 12.83 2.5 12 2.5C11.17 2.5 10.5 3.17 10.5 4V4.68C7.63 5.36 6 7.92 6 11V16L4 18V19H20V18L18 16ZM16 17H8V11C8 8.52 9.51 6.5 12 6.5C14.49 6.5 16 8.52 16 11V17Z"
+                            fill="#745AAA" />
+                    </svg>
+                </div>
+                <div class="toggles-container">
+                    <div class="toggle-item">
+                        <div class="toggle-labels">
+                            <span class="toggle-title">Presupuesto excedido</span>
+                            <span class="toggle-subtitle">Notificar cuando se supere el monto del presupuesto</span>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+
+                    <div class="toggle-item">
+                        <div class="toggle-labels">
+                            <span class="toggle-title">Riesgo de superar el presupuesto</span>
+                            <span class="toggle-subtitle">Notificar cuando se corra el riesgo de superar el
+                                presupuesto</span>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <button type="button" class="btn-guardar" onclick="validarPeriodo()">Guardar</button>
+                <button type="button" class="btn-descartar"
+                    onclick="window.location.href='presupuestos.html'">Descartar</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Notificación de Error de Periodo -->
+    <div id="errorNotification" class="notification-error">
+        <div class="notification-content">
+            <div class="notification-text">
+                <strong>Error al establecer periodo</strong>
+                <p>Introduzca un periodo especifico para registrar el presupuesto</p>
+            </div>
+            <span class="close-icon" onclick="hideError()">×</span>
+        </div>
+    </div>
+
+    <!-- Barra inferior -->
+    <nav class="bottom-bar">
+        <div class="icon" onclick="window.location.href='movimientos.html'">
+            <img src="../img/iconMovimiento.svg" alt="icon">
+            <span class="text">Movimiento</span>
+        </div>
+        <div class="icon" onclick="window.location.href='presupuestos.html'">
+            <span class="separator"></span>
+            <img src="../img/iconPresupuesto.svg" alt="icon">
+            <span class="text">Presupuesto</span>
+        </div>
+        <div class="icon" onclick="window.location.href='metas.html'">
+            <span class="separator"></span>
+            <img src="../img/iconMetas.svg" alt="icon">
+            <span class="text">Metas</span>
+        </div>
+        <div class="icon" onclick="window.location.href='reportes.html'">
+            <span class="separator"></span>
+            <img src="../img/iconReportes.svg" alt="icon">
+            <span class="text">Reportes</span>
+        </div>
+    </nav>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/crearPresupuesto.js"></script>
+</body>
+
+</html>

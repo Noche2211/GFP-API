@@ -1,0 +1,327 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/reportes.css" />
+    <title>Reportes</title>
+    <!--
+        reportes.html
+        Propósito: Página de reportes y exportación de datos.
+        - Incluye un modal de exportación controlado por `../js/reportes.js`.
+        - Estilos en `../css/reportes.css`.
+    -->
+</head>
+
+<body>
+
+    <!-- Botón para abrir el menú -->
+    <button class="menu-toggle" id="menuBtn">
+        <img src="../img/menuCerrado.svg" alt="menu" id="menuIcon" style="width: 48px; height: 48px;">
+    </button>
+
+    <!-- Menú lateral derecho -->
+    <aside class="side-menu" id="sideMenu">
+        <div class="user-box">
+            <div class="user-icon">
+                <img src="../img/login.svg" alt="icon">
+            </div>
+            <p class="user-name">Usuario</p>
+        </div>
+
+        <ul class="menu-options">
+            <li onclick="window.location.href='perfil.html'">Perfil</li>
+            <li onclick="window.location.href='movimientos.html'">Movimientos</li>
+            <li onclick="window.location.href='presupuestos.html'">Presupuestos</li>
+            <li onclick="window.location.href='metas.html'">Metas</li>
+            <li class="active">Reportes</li>
+
+            <li onclick="window.location.href='copiadeSeguridad.html'">Copia de seguridad</li>
+
+            <li onclick="window.location.href='configuracion.html'">Configuración</li>
+            <li onclick="window.location.href='login.html'">Cerrar Sesión</li>
+        </ul>
+    </aside>
+
+    <!-- Contenedor principal -->
+    <main class="content">
+        <h1>Reportes</h1>
+
+        <div class="reports-grid">
+            <!-- COLUMNA MOVIMIENTOS -->
+            <div class="report-column">
+                <h2 class="column-title">Movimientos</h2>
+
+                <h3 class="section-title">Ingresos</h3>
+                <div class="report-item">
+                    <svg class="icon income" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <circle cx="12" cy="12" r="10" />
+                    </svg>
+                    <div class="details">
+                        <div class="amount">1.000.000,00</div>
+                        <div class="description">Trabajo<br>Bono por cumplimiento de metas</div>
+                    </div>
+                    <div class="date">12/06/2025</div>
+                </div>
+                <div class="report-item">
+                    <svg class="icon income" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <circle cx="12" cy="12" r="10" />
+                    </svg>
+                    <div class="details">
+                        <div class="amount">1.000.000,00</div>
+                        <div class="description">Trabajo<br>Bono por cumplimiento de metas</div>
+                    </div>
+                    <div class="date">12/06/2025</div>
+                </div>
+                <div class="report-item">
+                    <svg class="icon income" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <circle cx="12" cy="12" r="10" />
+                    </svg>
+                    <div class="details">
+                        <div class="amount">1.000.000,00</div>
+                        <div class="description">Trabajo<br>Bono por cumplimiento de metas</div>
+                    </div>
+                    <div class="date">12/06/2025</div>
+                </div>
+
+                <h3 class="section-title">Gastos</h3>
+                <div class="report-item">
+                    <svg class="icon expense" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <circle cx="12" cy="12" r="10" />
+                    </svg>
+                    <div class="details">
+                        <div class="amount">100.000,00</div>
+                        <div class="description">Servicios<br>Pago de servicios de luz</div>
+                    </div>
+                    <div class="date">12/06/2025</div>
+                </div>
+                <div class="report-item">
+                    <svg class="icon expense" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <circle cx="12" cy="12" r="10" />
+                    </svg>
+                    <div class="details">
+                        <div class="amount">100.000,00</div>
+                        <div class="description">Servicios<br>Pago de servicios de luz</div>
+                    </div>
+                    <div class="date">12/06/2025</div>
+                </div>
+                <div class="report-item">
+                    <svg class="icon expense" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <circle cx="12" cy="12" r="10" />
+                    </svg>
+                    <div class="details">
+                        <div class="amount">100.000,00</div>
+                        <div class="description">Servicios<br>Pago de servicios de luz</div>
+                    </div>
+                    <div class="date">12/06/2025</div>
+                </div>
+            </div>
+
+            <!-- COLUMNA PRESUPUESTOS -->
+            <div class="report-column">
+                <h2 class="column-title">Presupuestos</h2>
+
+                <div class="budget-item">
+                    <svg class="edit-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2">
+                        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                    </svg>
+                    <div class="info">
+                        <div class="title">900.000,00 | Concierto</div>
+                        <div class="subtitle">Presupuesto para el concierto de Caramelos de cianura</div>
+                        <div class="frequency">Ocio</div>
+                        <span class="category">Una vez</span>
+                    </div>
+                </div>
+
+                <div class="budget-item">
+                    <svg class="edit-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2">
+                        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                    </svg>
+                    <div class="info">
+                        <div class="title">200.000,00 | Licuadora</div>
+                        <div class="subtitle">Presupuesto para una licuadora nueva</div>
+                        <div class="frequency">Hogar</div>
+                        <span class="category">Una vez</span>
+                    </div>
+                </div>
+
+                <div class="budget-item">
+                    <svg class="edit-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2">
+                        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                    </svg>
+                    <div class="info">
+                        <div class="title">150.000,00 | Pasajes</div>
+                        <div class="subtitle">Presupuesto para viaje del bus y el metro</div>
+                        <div class="frequency">Transporte</div>
+                        <span class="category">Semanal</span>
+                    </div>
+                </div>
+
+                <div class="budget-item">
+                    <svg class="edit-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2">
+                        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                    </svg>
+                    <div class="info">
+                        <div class="title">400.000,00 | Luz y agua</div>
+                        <div class="subtitle">Presupuesto para los servicios del apartamento</div>
+                        <div class="frequency">Servicios</div>
+                        <span class="category">Mensual</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- COLUMNA METAS -->
+            <div class="report-column">
+                <h2 class="column-title">Metas</h2>
+
+                <div class="goal-item">
+                    <svg class="star-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2">
+                        <polygon
+                            points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
+                        </polygon>
+                    </svg>
+                    <div class="info">
+                        <div class="title">Telefono</div>
+                        <div class="frequency">Una vez</div>
+                        <div class="progress-info">Monto ahorrado: $1.700.000 - $3.000.000</div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 57%;"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="goal-item">
+                    <svg class="star-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2">
+                        <polygon
+                            points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
+                        </polygon>
+                    </svg>
+                    <div class="info">
+                        <div class="title">Moto</div>
+                        <div class="frequency">Una vez</div>
+                        <div class="progress-info">Monto ahorrado: $3.550.000 - $15.000.000</div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 24%;"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="goal-item">
+                    <svg class="star-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2">
+                        <polygon
+                            points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
+                        </polygon>
+                    </svg>
+                    <div class="info">
+                        <div class="title">Operación</div>
+                        <div class="frequency">Una vez</div>
+                        <div class="progress-info">Monto ahorrado: $630.000 - $2.000.000</div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 32%;"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="goal-item">
+                    <svg class="star-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2">
+                        <polygon
+                            points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
+                        </polygon>
+                    </svg>
+                    <div class="info">
+                        <div class="title">Gimnasio para el gato</div>
+                        <div class="frequency">Una vez</div>
+                        <div class="progress-info">Monto ahorrado: $250.000 - $300.000</div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 83%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="export-section">
+            <button class="btn-export" onclick="showExportModal()">Exportar datos</button>
+        </div>
+    </main>
+
+    <!-- Export Modal -->
+    <div class="export-modal" id="exportModal">
+        <div class="modal-content">
+            <h2>Exportar datos</h2>
+            <p class="modal-subtitle">Guarda tus reportes de movimientos, presupuestos o metas de ahorro</p>
+
+            <div class="modal-form">
+                <div class="form-field">
+                    <label>Formato</label>
+                    <select id="exportFormat">
+                        <option value="csv">CSV</option>
+                        <option value="pdf">PDF</option>
+                        <option value="excel">Excel</option>
+                    </select>
+                </div>
+
+                <div class="form-field">
+                    <label>Rango de fechas</label>
+                    <input type="text" id="dateRange" value="01/02/2025 - 13/05/2025" readonly>
+                </div>
+
+                <div class="form-field">
+                    <label>Reportes de:</label>
+                    <textarea id="reportTypes" readonly>Movimientos - Presupuestos</textarea>
+                </div>
+
+                <div class="form-field">
+                    <label>Guardar la carpeta:</label>
+                    <input type="text" id="savePath" value="D:\User data\Documents\Reportes" readonly>
+                </div>
+
+                <div class="modal-actions">
+                    <button class="btn-export-confirm" onclick="exportData()">Exportar</button>
+                    <button class="btn-cancel" onclick="closeExportModal()">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Barra inferior -->
+    <nav class="bottom-bar">
+        <div class="icon" onclick="window.location.href='movimientos.html'">
+            <img src="../img/iconMovimiento.svg" alt="icon">
+            <span class="text">Movimiento</span>
+        </div>
+        <div class="icon" onclick="window.location.href='presupuestos.html'">
+            <span class="separator"></span>
+            <img src="../img/iconPresupuesto.svg" alt="icon">
+            <span class="text">Presupuesto</span>
+        </div>
+        <div class="icon" onclick="window.location.href='metas.html'">
+            <span class="separator"></span>
+            <img src="../img/iconMetas.svg" alt="icon">
+            <span class="text">Metas</span>
+        </div>
+        <div class="icon active">
+            <span class="separator"></span>
+            <img src="../img/iconReportes.svg" alt="icon">
+            <span class="text">Reportes</span>
+        </div>
+    </nav>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/reportes.js"></script>
+</body>
+
+</html>
