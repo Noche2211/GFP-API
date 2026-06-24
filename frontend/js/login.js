@@ -6,8 +6,8 @@
  * - Mantiene la sesión en localStorage.
  * - Actualiza y elimina usuario con PUT /api/users/:id y DELETE /api/users/:id.
  */
-const API_BASE_URL = 'http://localhost:3000/api/users';
 const CURRENT_USER_KEY = 'currentUser';
+const USERS_API_URL = `${API_BASE_URL}/api/users`;
 
 function setCurrentUser(user) {
     localStorage.setItem(CURRENT_USER_KEY, JSON.stringify(user));
@@ -63,7 +63,7 @@ async function registerUser() {
     const name = lastName ? `${firstName} ${lastName}` : firstName;
 
     try {
-        const response = await fetch(API_BASE_URL, {
+        const response = await fetch(USERS_API_URL, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ name, email, password })
@@ -95,7 +95,7 @@ async function loginUser() {
     }
 
     try {
-        const response = await fetch(`${API_BASE_URL}/login`, {
+        const response = await fetch(`${USERS_API_URL}/login`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email, password })
@@ -195,7 +195,7 @@ async function updateCurrentUser() {
     }
 
     try {
-        const response = await fetch(`${API_BASE_URL}/${user.id}`, {
+        const response = await fetch(`${USERS_API_URL}/${user.id}`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ name, email })
@@ -225,7 +225,7 @@ async function deleteCurrentUser() {
     if (!confirmDelete) return;
 
     try {
-        const response = await fetch(`${API_BASE_URL}/${user.id}`, {
+        const response = await fetch(`${USERS_API_URL}/${user.id}`, {
             method: 'DELETE'
         });
 
@@ -267,7 +267,7 @@ async function changePassword() {
     }
 
     try {
-        const response = await fetch(`${API_BASE_URL}/login`, {
+        const response = await fetch(`${USERS_API_URL}/login`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email: user.email, password: currentPassword })
@@ -278,7 +278,7 @@ async function changePassword() {
             throw new Error(data.message || 'Contraseña actual incorrecta.');
         }
 
-        const updateResponse = await fetch(`${API_BASE_URL}/${user.id}`, {
+        const updateResponse = await fetch(`${USERS_API_URL}/${user.id}`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ password: newPassword })
