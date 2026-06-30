@@ -270,6 +270,46 @@ h1 {
     height: 80px;
 }
 
+.custom-category-container {
+    display: none;
+    position: absolute;
+    left: calc(100% + 15px);
+    top: 50%;
+    transform: translateY(-50%);
+    width: 180px;
+    z-index: 6;
+}
+
+.custom-category-suggestions {
+    display: none;
+    position: absolute;
+    left: 0;
+    bottom: calc(100% + 6px);
+    width: 100%;
+    background: white;
+    border: 1px solid #D8C8FF;
+    border-radius: 8px;
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
+    max-height: 110px;
+    overflow-y: auto;
+}
+
+.custom-category-suggestions button {
+    display: block;
+    width: 100%;
+    border: none;
+    background: white;
+    text-align: left;
+    padding: 8px 10px;
+    cursor: pointer;
+    font-size: 13px;
+    color: var(--primario);
+}
+
+.custom-category-suggestions button:hover {
+    background: #F4EFFF;
+}
+
 /* NOTIFICATIONS SECTION */
 .notifications-section {
     display: flex;

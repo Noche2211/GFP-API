@@ -46,7 +46,8 @@
     <div class="container">
         <h1>Presupuesto</h1>
 
-        <form class="budget-form">
+        <form class="budget-form" id="budgetForm">
+            <input type="hidden" id="budgetId" value="">
             <div class="form-group">
                 <label for="nombre">Nombre</label>
                 <div class="input-wrapper">
@@ -97,9 +98,11 @@
                         <option value="Transporte">Transporte</option>
                         <option value="Personalizada">Personalizada</option>
                     </select>
-                    <!-- Input oculto para la categoría personalizada absolutizado -->
-                    <input type="text" id="categoriaPersonalizadaInput" placeholder=""
-                        style="display: none; position: absolute; left: calc(100% + 15px); top: 50%; transform: translateY(-50%); width: 160px; border: 1px solid #ccc; border-radius: 8px; padding: 10px 15px; z-index: 5;">
+                    <div id="categoriaPersonalizadaContainer" class="custom-category-container">
+                        <div id="categoriaPersonalizadaSuggestions" class="custom-category-suggestions"></div>
+                        <input type="text" id="categoriaPersonalizadaInput" placeholder="Escribe o selecciona una categoría"
+                            style="width: 160px; border: 1px solid #ccc; border-radius: 8px; padding: 10px 15px; z-index: 5;">
+                    </div>
                 </div>
             </div>
 
@@ -126,7 +129,7 @@
                             <span class="toggle-subtitle">Notificar cuando se supere el monto del presupuesto</span>
                         </div>
                         <label class="switch">
-                            <input type="checkbox" checked>
+                            <input type="checkbox" id="notifExceeded" checked>
                             <span class="slider"></span>
                         </label>
                     </div>
@@ -138,7 +141,7 @@
                                 presupuesto</span>
                         </div>
                         <label class="switch">
-                            <input type="checkbox" checked>
+                            <input type="checkbox" id="notifRisk" checked>
                             <span class="slider"></span>
                         </label>
                     </div>
@@ -146,7 +149,7 @@
             </div>
 
             <div class="form-actions">
-                <button type="button" class="btn-guardar" onclick="validarPeriodo()">Guardar</button>
+                <button type="button" class="btn-guardar" onclick="saveBudget()">Guardar</button>
                 <button type="button" class="btn-descartar"
                     onclick="window.location.href='presupuestos.html'">Descartar</button>
             </div>
@@ -157,7 +160,7 @@
     <div id="errorNotification" class="notification-error">
         <div class="notification-content">
             <div class="notification-text">
-                <strong>Error al establecer periodo</strong>
+                <strong>Error al establecer presupuesto</strong>
                 <p>Introduzca un periodo especifico para registrar el presupuesto</p>
             </div>
             <span class="close-icon" onclick="hideError()">×</span>
@@ -188,6 +191,7 @@
     </nav>
 
     <script src="../js/main.js"></script>
+    <script src="../js/budgetStorage.js"></script>
     <script src="../js/crearPresupuesto.js"></script>
 </body>
 
