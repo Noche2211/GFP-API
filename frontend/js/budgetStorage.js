@@ -1,3 +1,7 @@
+/*
+    frontend/js/budgetStorage.js
+    Propósito: Lógica de la aplicación y comportamiento del usuario para esta página.
+*/
 const BUDGET_STORAGE_KEY = 'gfpBudgets';
 
 function getBudgets() {
@@ -27,3 +31,4 @@ function deleteBudget(id) {
 function getBudgetById(id) {
     return getBudgets().find(budget => budget.id === id);
 }
+

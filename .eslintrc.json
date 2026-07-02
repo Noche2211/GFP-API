@@ -1,0 +1,21 @@
+{
+    "env": {
+        "browser": true,
+        "node": true,
+        "es2021": true
+    },
+    "extends": ["eslint:recommended", "prettier"],
+    "parserOptions": {
+        "ecmaVersion": 2021,
+        "sourceType": "script"
+    },
+    "rules": {
+        "indent": ["error", 4],
+        "quotes": ["error", "single"],
+        "semi": ["error", "always"],
+        "no-var": "error",
+        "prefer-const": "warn",
+        "no-unused-vars": ["warn", { "args": "none", "ignoreRestSiblings": true }],
+        "no-console": "off"
+    }
+}
