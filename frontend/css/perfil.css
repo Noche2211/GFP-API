@@ -24,7 +24,7 @@ body {
 
 /* BOTÓN DE DESPLIEGUE */
 .menu-toggle {
-    position: fixed;
+    position: absolute;
     top: 15px;
     right: 15px;
     background: transparent;
@@ -182,7 +182,8 @@ body {
     /* oculto */
     top: 0;
     width: 230px;
-    height: fit-content;
+    max-height: 100vh;
+    overflow-y: auto;
     padding: 40px 20px;
     background: var(--fondo);
     transition: 0.3s ease;

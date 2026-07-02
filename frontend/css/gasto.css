@@ -27,9 +27,9 @@ body {
 
 /* MENU TOGGLE */
 .menu-toggle {
-    position: fixed;
-    top: 15px;
-    right: 15px;
+    position: relative;
+    float: right;
+    margin: 15px 15px 0 0;
     background: transparent;
     color: white;
     border: none;
@@ -242,7 +242,8 @@ input[type="date"] {
     right: 0;
     top: 0;
     width: 230px;
-    height: fit-content;
+    max-height: 100vh;
+    overflow-y: auto;
     padding: 40px 20px;
     background: var(--fondo);
     transition: transform 0.3s ease;

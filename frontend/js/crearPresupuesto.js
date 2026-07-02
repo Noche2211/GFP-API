@@ -15,6 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initializeEditMode();
 });
 
+// Limita el monto a un máximo predefinido y aplica formato de miles/decimales al escribir
 function initializeAmountFormatter() {
     const montoInput = document.getElementById('montoInput');
     if (!montoInput) return;
@@ -52,6 +53,7 @@ function initializeAmountFormatter() {
     });
 }
 
+// Alterna la visibilidad de los campos de fecha según el periodo seleccionado
 function initializePeriodoSelect() {
     const periodoSelect = document.getElementById('periodo');
     const periodoPersonalizadoContainer = document.getElementById('periodoPersonalizadoContainer');
@@ -70,6 +72,7 @@ function initializePeriodoSelect() {
     });
 }
 
+// Gestiona la visibilidad y sugerencias de categorías personalizadas
 function initializeCategoriaSelect() {
     const categoriaSelect = document.getElementById('categoria');
     const categoriaPersonalizadaContainer = document.getElementById('categoriaPersonalizadaContainer');
@@ -104,6 +107,7 @@ function initializeCategoriaSelect() {
     });
 }
 
+// Carga los datos del presupuesto desde localStorage si se detecta un ID en la URL
 function initializeEditMode() {
     const params = new URLSearchParams(window.location.search);
     const budgetId = params.get('id');
@@ -142,6 +146,7 @@ function initializeEditMode() {
     document.getElementById('notifRisk').checked = !!existingBudget.notifRisk;
 }
 
+// Valida campos del formulario, organiza la data y guarda el presupuesto (crear o actualizar)
 function saveBudget() {
     const budgetData = collectBudgetFormData();
     if (!budgetData) return;
@@ -160,6 +165,7 @@ function saveBudget() {
     window.location.href = 'presupuestos.html?success=budget';
 }
 
+// Reúne y estructura los valores del formulario en un objeto presupuesto
 function collectBudgetFormData() {
     const budgetId = document.getElementById('budgetId').value || generateId();
     const nombre = document.getElementById('nombre').value.trim();
@@ -192,6 +198,7 @@ function collectBudgetFormData() {
     };
 }
 
+// Verifica campos obligatorios y coherencia en las fechas
 function validateBudgetData(data) {
     if (!data.nombre || !data.monto || !data.periodo || !data.categoria) {
         return false;
@@ -228,6 +235,7 @@ function formatAmountWithoutThousands(value) {
     return amount.replace('.', ',');
 }
 
+// Gestiona el autocompletado y registro de nuevas categorías personalizadas
 function renderCustomCategorySuggestions(query) {
     const suggestionsContainer = document.getElementById('categoriaPersonalizadaSuggestions');
     const input = document.getElementById('categoriaPersonalizadaInput');
@@ -265,6 +273,7 @@ function getMatchingCustomCategories(query) {
     return customCategories.filter((name) => name.toLowerCase().includes(normalized)).slice(0, 5);
 }
 
+// Recupera categorías guardadas y añade las nuevas encontradas en presupuestos previos
 function getCustomCategories() {
     const storedCategories = JSON.parse(localStorage.getItem('gfpCustomCategories') || '[]');
     const builtInCategories = ['Servicios', 'Alimentacion', 'Transporte', 'Personalizada'];

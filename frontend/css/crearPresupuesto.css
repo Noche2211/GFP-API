@@ -30,7 +30,7 @@ body {
 
 /* MENU LATERAL DESPLEGABLE */
 .menu-toggle {
-    position: fixed;
+    position: absolute;
     top: 15px;
     right: 15px;
     background: transparent;
@@ -40,7 +40,6 @@ body {
     border-radius: 8px;
     cursor: pointer;
     font-size: 18px;
-    z-index: 1000;
     transition: transform 0.35s ease;
 }
 
@@ -49,7 +48,8 @@ body {
     right: 0;
     top: 0;
     width: 230px;
-    height: fit-content;
+    max-height: 100vh;
+    overflow-y: auto;
     padding: 40px 20px;
     background: var(--fondo);
     transition: transform 0.3s ease;
