@@ -73,10 +73,29 @@
                     </ul>
                 </div>
             </div>
-            <button class="back-btn" onclick="document.getElementById('selectionView').style.display='none'; document.getElementById('newMovementBtn').style.display='inline';">Volver</button>
+            <button class="back-btn" onclick="closeSelectionView()">Volver</button>
+        </div>
+
+        <div id="movementsHistory" class="movements-history">
+            <div class="history-header">
+                <h2>Historial</h2>
+            </div>
+            <div id="movementsList" class="movements-list"></div>
+            <div id="noMovementsMessage" class="no-movements-message">No hay movimientos registrados aún.</div>
         </div>
 
     </main>
+
+    <!-- Notificación de éxito -->
+    <div id="successNotification" class="notification-toast">
+        <div class="notification-content">
+            <div class="notification-text">
+                <strong>Movimiento agregado</strong>
+                <p>Ahora puedes visualizarlo en el historial</p>
+            </div>
+            <span class="close-icon" onclick="hideNotification()">×</span>
+        </div>
+    </div>
 
     <!-- Barra inferior -->
     <nav class="bottom-bar">
@@ -102,6 +121,7 @@
     </nav>
 
     <script src="../js/main.js"></script>
+    <script src="../js/movementStorage.js"></script>
     <script src="../js/movimientos.js"></script>
 
 </body>

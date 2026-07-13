@@ -178,6 +178,96 @@ body {
     width: 100%;
 }
 
+.movements-history {
+    width: 100%;
+    margin-top: 40px;
+}
+
+.history-header h2 {
+    font-size: 28px;
+    font-weight: 500;
+    color: var(--primario);
+    margin: 0 0 20px;
+    text-align: center;
+}
+
+.movements-list {
+    display: grid;
+    gap: 18px;
+}
+
+.movement-item {
+    background: white;
+    border: 1px solid rgba(79, 55, 138, 0.15);
+    border-radius: 24px;
+    padding: 22px;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 16px;
+    align-items: flex-start;
+    box-shadow: 0 8px 24px rgba(79, 55, 138, 0.06);
+}
+
+.movement-icon {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--primario);
+    width: 42px;
+    height: 42px;
+    display: grid;
+    place-items: center;
+    background: rgba(79, 55, 138, 0.08);
+    border-radius: 50%;
+}
+
+.movement-expense .movement-icon {
+    color: var(--rojo);
+    background: rgba(231, 106, 106, 0.1);
+}
+
+.movement-details {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.movement-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
+}
+
+.movement-amount {
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--primario);
+}
+
+.movement-category {
+    display: inline-flex;
+    padding: 6px 12px;
+    border-radius: 999px;
+    background: #F0E8FF;
+    color: var(--barras);
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.movement-date,
+.movement-description {
+    color: #4D4D4D;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.no-movements-message {
+    color: #4b4b4b;
+    text-align: center;
+    margin-top: 12px;
+    font-size: 15px;
+}
+
 .selection-column {
     flex: 1;
     max-width: 400px;

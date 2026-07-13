@@ -83,8 +83,40 @@ function validarFecha() {
     if (dateObj > hoy) {
         if (errorNotif) errorNotif.classList.add('show');
     } else {
-        window.location.href = 'movimientos.html?success=expense';
+        saveExpenseMovement();
     }
+}
+
+function saveExpenseMovement() {
+    const amountInput = document.getElementById('montoInput');
+    const dateInput = document.getElementById('fechaInput');
+    const categorySelect = document.getElementById('categoriaSelect');
+    const customCategoryInput = document.getElementById('categoriaPersonalizadaInput');
+    const descriptionInput = document.querySelector('.textarea-input');
+
+    if (!amountInput || !dateInput || !categorySelect) return;
+
+    const amountRaw = amountInput.value.replace(/\./g, '').replace(/,/g, '.');
+    const amount = Number(amountRaw);
+    const date = dateInput.value;
+    const category = categorySelect.value === 'personalizada' ? (customCategoryInput?.value || 'Personalizada') : categorySelect.value;
+    const description = descriptionInput?.value || '';
+
+    if (!amount || !date || !category) {
+        alert('Por favor completa los campos de monto, fecha y categoría.');
+        return;
+    }
+
+    addMovement({
+        id: Date.now().toString(),
+        type: 'expense',
+        amount: amountRaw,
+        date,
+        category,
+        description
+    });
+
+    window.location.href = 'movimientos.html?success=expense';
 }
 
 function hideError() {

@@ -46,6 +46,58 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
+function saveIncomeMovement() {
+    const amountInput = document.getElementById('montoInput');
+    const dateInput = document.getElementById('fechaInput');
+    const categorySelect = document.getElementById('categoriaSelect');
+    const customCategoryInput = document.getElementById('categoriaPersonalizadaInput');
+    const descriptionInput = document.querySelector('.textarea-input');
+
+    if (!amountInput || !dateInput || !categorySelect) return;
+
+    const amountRaw = amountInput.value.replace(/\./g, '').replace(/,/g, '.');
+    const amount = Number(amountRaw);
+    const date = dateInput.value;
+    const category = categorySelect.value === 'personalizada' ? (customCategoryInput?.value || 'Personalizada') : categorySelect.value;
+    const description = descriptionInput?.value || '';
+
+    if (!amount || !date || !category) {
+        alert('Por favor completa los campos de monto, fecha y categoría.');
+        return;
+    }
+
+    addMovement({
+        id: Date.now().toString(),
+        type: 'income',
+        amount: amountRaw,
+        date,
+        category,
+        description
+    });
+
+    window.location.href = 'movimientos.html?success=income';
+}
+
+function validarFechaIngreso() {
+    const fechaInput = document.getElementById('fechaInput');
+    const errorNotif = document.getElementById('errorNotification');
+
+    if (!fechaInput || !fechaInput.value) return;
+
+    const hoy = new Date();
+    hoy.setHours(0, 0, 0, 0);
+
+    const [year, month, day] = fechaInput.value.split('-').map(Number);
+    const dateObj = new Date(year, month - 1, day);
+    dateObj.setHours(0, 0, 0, 0);
+
+    if (dateObj > hoy) {
+        if (errorNotif) errorNotif.classList.add('show');
+    } else {
+        saveIncomeMovement();
+    }
+}
+
 function hideNotification() {
     const el = document.getElementById('successNotification');
     if (el) el.classList.remove('show');
