@@ -64,14 +64,22 @@
         <div class="top-cards">
             <!-- Ingresos / Gastos -->
             <div class="card small">
+                <div class="period-header">
+                    <span class="period-label">Ver por:</span>
+                    <div class="period-selector" id="periodSelector">
+                        <button type="button" class="period-option active" data-period="month">Mes</button>
+                        <button type="button" class="period-option" data-period="week">Semana</button>
+                        <button type="button" class="period-option" data-period="day">Día</button>
+                    </div>
+                </div>
                 <div class="card-row">
                     <div>
                         <h4>Total de Ingresos</h4>
-                        <p class="green">3.000.000,00</p>
+                        <p id="totalIncomeValue" class="green">$ 0,00</p>
                     </div>
                     <div>
                         <h4>Total de Gastos</h4>
-                        <p class="red">300.000,00</p>
+                        <p id="totalExpenseValue" class="red">$ 0,00</p>
                     </div>
                 </div>
                 <div class="card-row">
@@ -87,7 +95,7 @@
             <!-- Balance General -->
             <div class="card balance">
                 <h3>Balance General</h3>
-                <p class="balance-amount">2.700.000,00</p>
+                <p id="balanceAmountValue" class="balance-amount">$ 0,00</p>
                 <div class="balance-bar">
                     <div class="balance-fill" style="width:75%"></div>
                 </div>
@@ -138,6 +146,8 @@
     <script src="../js/main.js"></script>
     <script src="../js/config.js"></script>
     <script src="../js/login.js"></script>
+    <script src="../js/movementStorage.js"></script>
+    <script src="../js/perfil.js"></script>
 
 </body>
 

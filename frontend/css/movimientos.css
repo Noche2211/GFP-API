@@ -95,7 +95,7 @@
 body {
     margin: 0;
     padding: 0;
-    font-family: 'Segoe UI', sans-serif;
+    font-family: 'Inter', sans-serif;
     background: var(--fondo);
     color: var(--primario);
 }
@@ -119,6 +119,7 @@ body {
 /* CONTENEDOR PRINCIPAL */
 .content {
     padding: 40px 60px;
+    padding-bottom: 90px;
     margin-right: 0;
 }
 
@@ -201,22 +202,26 @@ body {
     border: 1px solid rgba(79, 55, 138, 0.15);
     border-radius: 24px;
     padding: 22px;
-    display: grid;
-    grid-template-columns: auto 1fr;
-    gap: 16px;
-    align-items: flex-start;
     box-shadow: 0 8px 24px rgba(79, 55, 138, 0.06);
+}
+
+.movement-main {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+    width: 100%;
 }
 
 .movement-icon {
     font-size: 24px;
     font-weight: 700;
-    color: var(--primario);
+    color: var(--verde);
     width: 42px;
     height: 42px;
     display: grid;
     place-items: center;
-    background: rgba(79, 55, 138, 0.08);
+    background: rgba(87, 194, 122, 0.1);
     border-radius: 50%;
 }
 
@@ -229,6 +234,7 @@ body {
     display: flex;
     flex-direction: column;
     gap: 10px;
+    flex: 1;
 }
 
 .movement-meta {
@@ -259,6 +265,33 @@ body {
     color: #4D4D4D;
     font-size: 14px;
     line-height: 1.5;
+}
+
+.movement-actions {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    margin-left: auto;
+}
+
+.movement-action {
+    border: none;
+    padding: 10px 14px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.movement-action.edit {
+    background: #F4F0FF;
+    color: var(--primario);
+}
+
+.movement-action.delete {
+    background: #FFE7E7;
+    color: #C23A3A;
 }
 
 .no-movements-message {
@@ -331,6 +364,65 @@ body {
 .back-btn:hover {
     background-color: var(--primario);
     color: white;
+}
+
+.confirm-dialog {
+    position: fixed;
+    inset: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.42);
+    z-index: 2500;
+}
+
+.confirm-dialog.open {
+    display: flex;
+}
+
+.confirm-card {
+    width: min(380px, calc(100% - 40px));
+    background: white;
+    border-radius: 24px;
+    padding: 28px;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.18);
+    display: grid;
+    gap: 22px;
+    text-align: center;
+}
+
+.confirm-card p {
+    margin: 0;
+    font-size: 16px;
+    color: var(--primario);
+}
+
+.confirm-actions {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+}
+
+.confirm-actions .btn-descartar,
+.confirm-actions .btn-guardar {
+    width: 120px;
+    padding: 10px 30px;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    font-weight: 500;
+    border: none;
+    transition: opacity 0.3s;
+}
+
+.confirm-actions .btn-guardar {
+    background-color: var(--primario);
+    color: white;
+}
+
+.confirm-actions .btn-descartar {
+    background-color: #F4F0FF;
+    color: var(--primario);
 }
 
 /* MENU LATERAL DESPLEGABLE */

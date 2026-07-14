@@ -74,6 +74,64 @@ body {
     margin-bottom: 40px;
 }
 
+.period-header {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-bottom: 18px;
+}
+
+.period-label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #4D4D4D;
+    white-space: nowrap;
+    margin-right: auto;
+}
+
+.period-selector {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    padding-bottom: 6px;
+    scrollbar-width: thin;
+    -webkit-overflow-scrolling: touch;
+    margin-left: auto;
+}
+
+.period-selector::-webkit-scrollbar {
+    height: 8px;
+}
+
+.period-selector::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.period-selector::-webkit-scrollbar-thumb {
+    background: rgba(116, 90, 170, 0.35);
+    border-radius: 999px;
+}
+
+.period-option {
+    flex: 0 0 auto;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 999px;
+    background: #F0E8FF;
+    color: var(--primario);
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.25s ease;
+}
+
+.period-option.active,
+.period-option:hover {
+    background: var(--primario);
+    color: white;
+}
+
 .card.small {
     width: 380px;
 }

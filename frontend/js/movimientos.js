@@ -6,10 +6,14 @@
  - Provee `hideNotification()` local para ocultar toasts.
 */
 
+let movementToDeleteId = null;
+
 document.addEventListener('DOMContentLoaded', () => {
     const newMovementBtn = document.getElementById('newMovementBtn');
     const selectionView = document.getElementById('selectionView');
     const movementsHistory = document.getElementById('movementsHistory');
+    const confirmDeleteBtn = document.getElementById('confirmDeleteBtn');
+    const cancelDeleteBtn = document.getElementById('cancelDeleteBtn');
 
     const selectionTitles = document.querySelectorAll('.selection-column h2');
     selectionTitles.forEach(title => {
@@ -50,17 +54,42 @@ document.addEventListener('DOMContentLoaded', () => {
 
     updateHistoryVisibility();
 
+    if (confirmDeleteBtn) {
+        confirmDeleteBtn.addEventListener('click', () => {
+            if (!movementToDeleteId) return;
+            deleteMovement(movementToDeleteId);
+            movementToDeleteId = null;
+            closeDeleteConfirm();
+            renderMovements();
+        });
+    }
+
+    if (cancelDeleteBtn) {
+        cancelDeleteBtn.addEventListener('click', () => {
+            closeDeleteConfirm();
+        });
+    }
+
     // Show success notification if present
     const successType = params.get('success');
-    if (successType === 'income' || successType === 'expense') {
+    if (successType === 'income' || successType === 'incomeUpdated') {
         const successNotif = document.getElementById('successNotification');
         if (successNotif) {
             const title = successNotif.querySelector('strong');
-            if (successType === 'expense') {
-                title.textContent = 'Gasto agregado';
-            } else {
-                title.textContent = 'Ingreso agregado';
-            }
+            title.textContent = successType === 'incomeUpdated' ? 'Ingreso actualizado' : 'Ingreso agregado';
+
+            successNotif.classList.add('show');
+            setTimeout(() => {
+                hideNotification();
+            }, 5000);
+        }
+    }
+
+    if (successType === 'expense' || successType === 'expenseUpdated') {
+        const successNotif = document.getElementById('successNotification');
+        if (successNotif) {
+            const title = successNotif.querySelector('strong');
+            title.textContent = successType === 'expenseUpdated' ? 'Gasto actualizado' : 'Gasto agregado';
 
             successNotif.classList.add('show');
             setTimeout(() => {
@@ -118,20 +147,55 @@ function renderMovements() {
         const item = document.createElement('div');
         item.className = `movement-item ${movement.type === 'expense' ? 'movement-expense' : 'movement-income'}`;
         item.innerHTML = `
-            <div class="movement-icon">
-                <img src="../img/${movement.type === 'expense' ? 'iconmenoshis.svg' : 'iconplushis.svg'}" alt="${movement.type === 'expense' ? 'Gasto' : 'Ingreso'}" />
-            </div>
-            <div class="movement-details">
-                <div class="movement-meta">
-                    <span class="movement-amount">$ ${formatMoney(movement.amount)}</span>
-                    <span class="movement-category">${formatMovementCategory(movement.category)}</span>
+            <div class="movement-main">
+                <div class="movement-icon">
+                    <img src="../img/${movement.type === 'expense' ? 'iconmenoshis.svg' : 'iconplushis.svg'}" alt="${movement.type === 'expense' ? 'Gasto' : 'Ingreso'}" />
                 </div>
-                <div class="movement-date">${formatMovementDate(movement.date)}</div>
-                ${movement.description ? `<div class="movement-description">${movement.description}</div>` : ''}
+                <div class="movement-details">
+                    <div class="movement-meta">
+                        <span class="movement-amount">$ ${formatMoney(movement.amount)}</span>
+                        <span class="movement-category">${formatMovementCategory(movement.category)}</span>
+                    </div>
+                    <div class="movement-date">${formatMovementDate(movement.date)}</div>
+                    ${movement.description ? `<div class="movement-description">${movement.description}</div>` : ''}
+                </div>
+                <div class="movement-actions">
+                    <button type="button" class="movement-action edit" data-id="${movement.id}">Editar</button>
+                    <button type="button" class="movement-action delete" data-id="${movement.id}">Eliminar</button>
+                </div>
             </div>
         `;
+
+        const editButton = item.querySelector('.movement-action.edit');
+        const deleteButton = item.querySelector('.movement-action.delete');
+
+        if (editButton) {
+            editButton.addEventListener('click', () => {
+                const targetPage = movement.type === 'expense' ? 'gasto.html' : 'ingreso.html';
+                window.location.href = `${targetPage}?id=${movement.id}`;
+            });
+        }
+
+        if (deleteButton) {
+            deleteButton.addEventListener('click', () => {
+                openDeleteConfirm(movement.id);
+            });
+        }
+
         list.appendChild(item);
     });
+}
+
+function openDeleteConfirm(id) {
+    movementToDeleteId = id;
+    const dialog = document.getElementById('deleteConfirm');
+    if (dialog) dialog.classList.add('open');
+}
+
+function closeDeleteConfirm() {
+    movementToDeleteId = null;
+    const dialog = document.getElementById('deleteConfirm');
+    if (dialog) dialog.classList.remove('open');
 }
 
 function hideNotification() {
