@@ -27,6 +27,24 @@ document.addEventListener('DOMContentLoaded', () => {
         input.addEventListener('input', () => updateInputColor(input));
     });
 
+    const categoriaSelect = document.getElementById('categoriaSelect');
+    const categoriaPersonalizadaInput = document.getElementById('categoriaPersonalizadaInput');
+    if (categoriaSelect) {
+        categoriaSelect.addEventListener('change', function () {
+            if (this.value === 'personalizada') {
+                if (categoriaPersonalizadaInput) {
+                    categoriaPersonalizadaInput.style.display = 'block';
+                    updateInputColor(categoriaPersonalizadaInput);
+                }
+            } else {
+                if (categoriaPersonalizadaInput) {
+                    categoriaPersonalizadaInput.style.display = 'none';
+                    categoriaPersonalizadaInput.value = '';
+                }
+            }
+        });
+    }
+
     const montoInput = document.getElementById('montoInput');
     if (montoInput) {
         montoInput.addEventListener('input', function (e) {
