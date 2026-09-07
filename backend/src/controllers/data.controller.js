@@ -20,6 +20,8 @@ exports.save = (req, res) => {
         assertResource(resource);
         const { userId, id, ...data } = req.body;
         if (!userId || !id) return res.status(400).json({ message: 'Faltan usuario o identificador.' });
+        const user = db.prepare('SELECT id FROM users WHERE id = ?').get(userId);
+        if (!user) return res.status(401).json({ message: 'La sesión no es válida en Render. Cierra sesión e inicia sesión nuevamente.' });
         const serialized = JSON.stringify(data);
         const existing = db.prepare('SELECT id FROM app_data WHERE id = ? AND resource = ? AND user_id = ?').get(id, resource, userId);
         if (existing) {
