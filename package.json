@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
+    "start": "pnpm --dir backend start",
     "lint": "eslint \"frontend/js/**/*.js\" \"backend/**/*.js\"",
     "format": "prettier --write \"**/*.{js,css,html,json,md}\"",
     "check": "npm run lint"

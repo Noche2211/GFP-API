@@ -1,14 +1,31 @@
 const MOVEMENT_STORAGE_KEY = 'gfpMovements';
 
+function getMovementStorageKey() {
+    try {
+        const user = JSON.parse(localStorage.getItem('currentUser') || 'null');
+        return user?.id ? `${MOVEMENT_STORAGE_KEY}_${user.id}` : MOVEMENT_STORAGE_KEY;
+    } catch {
+        return MOVEMENT_STORAGE_KEY;
+    }
+}
+
 function getMovements() {
-    return JSON.parse(localStorage.getItem(MOVEMENT_STORAGE_KEY) || '[]');
+    return JSON.parse(localStorage.getItem(getMovementStorageKey()) || '[]');
 }
 
 function saveMovements(movements) {
-    localStorage.setItem(MOVEMENT_STORAGE_KEY, JSON.stringify(movements));
+    localStorage.setItem(getMovementStorageKey(), JSON.stringify(movements));
 }
 
-function addMovement(movement) {
+async function loadRemoteMovements() {
+    if (typeof loadRemoteData !== 'function' || !currentUserId()) return getMovements();
+    const movements = await loadRemoteData('movements');
+    saveMovements(movements);
+    return movements;
+}
+
+async function addMovement(movement) {
+    if (typeof saveRemoteData === 'function' && currentUserId()) await saveRemoteData('movements', movement);
     const movements = getMovements();
     movements.unshift(movement);
     saveMovements(movements);
@@ -18,7 +35,8 @@ function getMovementById(id) {
     return getMovements().find(movement => movement.id === id) || null;
 }
 
-function updateMovement(id, movement) {
+async function updateMovement(id, movement) {
+    if (typeof saveRemoteData === 'function' && currentUserId()) await saveRemoteData('movements', { ...movement, id });
     const movements = getMovements();
     const index = movements.findIndex(item => item.id === id);
     if (index === -1) return false;
@@ -27,7 +45,8 @@ function updateMovement(id, movement) {
     return true;
 }
 
-function deleteMovement(id) {
+async function deleteMovement(id) {
+    if (typeof deleteRemoteData === 'function' && currentUserId()) await deleteRemoteData('movements', id);
     const movements = getMovements();
     const filtered = movements.filter(item => item.id !== id);
     if (filtered.length === movements.length) return false;

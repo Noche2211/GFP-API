@@ -6,7 +6,8 @@
  - `hideError()` oculta notificaciones de error.
 */
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
+    await loadRemoteMovements();
     const params = new URLSearchParams(window.location.search);
     const editMovementId = params.get('id');
 
@@ -131,7 +132,7 @@ function validarFecha() {
     }
 }
 
-function saveExpenseMovement() {
+async function saveExpenseMovement() {
     const amountInput = document.getElementById('montoInput');
     const dateInput = document.getElementById('fechaInput');
     const categorySelect = document.getElementById('categoriaSelect');
@@ -163,12 +164,12 @@ function saveExpenseMovement() {
     };
 
     if (movementId) {
-        updateMovement(movementId, movementData);
+        await updateMovement(movementId, movementData);
         window.location.href = 'movimientos.html?success=expenseUpdated';
         return;
     }
 
-    addMovement({
+    await addMovement({
         id: Date.now().toString(),
         ...movementData
     });

@@ -8,7 +8,7 @@
 
 let movementToDeleteId = null;
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
     const newMovementBtn = document.getElementById('newMovementBtn');
     const selectionView = document.getElementById('selectionView');
     const movementsHistory = document.getElementById('movementsHistory');
@@ -55,9 +55,9 @@ document.addEventListener('DOMContentLoaded', () => {
     updateHistoryVisibility();
 
     if (confirmDeleteBtn) {
-        confirmDeleteBtn.addEventListener('click', () => {
+        confirmDeleteBtn.addEventListener('click', async () => {
             if (!movementToDeleteId) return;
-            deleteMovement(movementToDeleteId);
+            await deleteMovement(movementToDeleteId);
             movementToDeleteId = null;
             closeDeleteConfirm();
             renderMovements();
@@ -98,6 +98,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    await loadRemoteMovements();
     renderMovements();
     updateHistoryVisibility();
 });

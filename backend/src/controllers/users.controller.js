@@ -22,7 +22,7 @@ exports.createUser = (req, res) => {
 exports.loginUser = (req, res) => {
     try {
         const { email, password } = req.body;
-        const stmt = db.prepare(`SELECT id, name, email, password FROM users WHERE email = ?`);
+        const stmt = db.prepare(`SELECT id, name, email, password, birth_date, gender FROM users WHERE email = ?`);
         const user = stmt.get(email);
 
         if (!user) {
@@ -34,7 +34,7 @@ exports.loginUser = (req, res) => {
             return res.status(400).json({ message: "Usuario o contraseña inválidos" });
         }
 
-        res.json({ id: user.id, name: user.name, email: user.email });
+        res.json({ id: user.id, name: user.name, email: user.email, birthDate: user.birth_date, gender: user.gender });
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
@@ -53,7 +53,7 @@ exports.getUsers = (req, res) => {
 exports.updateUser = (req, res) => {
     try {
         const { id } = req.params;
-        const { name, email, password } = req.body;
+        const { name, email, password, birthDate, gender } = req.body;
         const updates = [];
         const params = [];
 
@@ -72,6 +72,16 @@ exports.updateUser = (req, res) => {
             const hashedPassword = bcrypt.hashSync(password, 10);
             updates.push("password = ?");
             params.push(hashedPassword);
+        }
+
+        if (birthDate !== undefined) {
+            updates.push("birth_date = ?");
+            params.push(birthDate || null);
+        }
+
+        if (gender !== undefined) {
+            updates.push("gender = ?");
+            params.push(gender || null);
         }
 
         if (updates.length === 0) {

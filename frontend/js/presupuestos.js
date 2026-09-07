@@ -8,7 +8,7 @@
 
 let budgetToDeleteId = null;
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
     const params = new URLSearchParams(window.location.search);
 
     if (params.get('success') === 'budget') {
@@ -30,15 +30,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const confirmDeleteBtn = document.getElementById('confirmDeleteBtn');
     if (confirmDeleteBtn) {
-        confirmDeleteBtn.addEventListener('click', () => {
+        confirmDeleteBtn.addEventListener('click', async () => {
             if (!budgetToDeleteId) return;
-            deleteBudget(budgetToDeleteId);
+            await deleteBudget(budgetToDeleteId);
             budgetToDeleteId = null;
             closeDeleteConfirm();
             renderBudgets();
         });
     }
 
+    await loadRemoteBudgets();
     renderBudgets();
 });
 

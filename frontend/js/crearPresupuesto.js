@@ -8,7 +8,8 @@
 
 const MAX_BUDGET_AMOUNT = 2222222222222;
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
+    await loadRemoteBudgets();
     initializeAmountFormatter();
     initializePeriodoSelect();
     initializeCategoriaSelect();
@@ -147,7 +148,7 @@ function initializeEditMode() {
 }
 
 // Valida campos del formulario, organiza la data y guarda el presupuesto (crear o actualizar)
-function saveBudget() {
+async function saveBudget() {
     const budgetData = collectBudgetFormData();
     if (!budgetData) return;
 
@@ -157,9 +158,9 @@ function saveBudget() {
     }
 
     if (getBudgetById(budgetData.id)) {
-        updateBudget(budgetData);
+        await updateBudget(budgetData);
     } else {
-        addBudget(budgetData);
+        await addBudget(budgetData);
     }
 
     window.location.href = 'presupuestos.html?success=budget';

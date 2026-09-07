@@ -4,26 +4,45 @@
 */
 const BUDGET_STORAGE_KEY = 'gfpBudgets';
 
+function getBudgetStorageKey() {
+    try {
+        const user = JSON.parse(localStorage.getItem('currentUser') || 'null');
+        return user?.id ? `${BUDGET_STORAGE_KEY}_${user.id}` : BUDGET_STORAGE_KEY;
+    } catch {
+        return BUDGET_STORAGE_KEY;
+    }
+}
+
 function getBudgets() {
-    return JSON.parse(localStorage.getItem(BUDGET_STORAGE_KEY) || '[]');
+    return JSON.parse(localStorage.getItem(getBudgetStorageKey()) || '[]');
 }
 
 function saveBudgets(budgets) {
-    localStorage.setItem(BUDGET_STORAGE_KEY, JSON.stringify(budgets));
+    localStorage.setItem(getBudgetStorageKey(), JSON.stringify(budgets));
 }
 
-function addBudget(budget) {
+async function loadRemoteBudgets() {
+    if (typeof loadRemoteData !== 'function' || !currentUserId()) return getBudgets();
+    const budgets = await loadRemoteData('budgets');
+    saveBudgets(budgets);
+    return budgets;
+}
+
+async function addBudget(budget) {
+    if (typeof saveRemoteData === 'function' && currentUserId()) await saveRemoteData('budgets', budget);
     const budgets = getBudgets();
     budgets.unshift(budget);
     saveBudgets(budgets);
 }
 
-function updateBudget(updatedBudget) {
+async function updateBudget(updatedBudget) {
+    if (typeof saveRemoteData === 'function' && currentUserId()) await saveRemoteData('budgets', updatedBudget);
     const budgets = getBudgets().map(budget => budget.id === updatedBudget.id ? updatedBudget : budget);
     saveBudgets(budgets);
 }
 
-function deleteBudget(id) {
+async function deleteBudget(id) {
+    if (typeof deleteRemoteData === 'function' && currentUserId()) await deleteRemoteData('budgets', id);
     const budgets = getBudgets().filter(budget => budget.id !== id);
     saveBudgets(budgets);
 }

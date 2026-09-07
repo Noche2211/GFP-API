@@ -5,7 +5,8 @@
  - `hideNotification()` oculta notificaciones de éxito (`successNotification`).
 */
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
+    await loadRemoteMovements();
     const params = new URLSearchParams(window.location.search);
     const editMovementId = params.get('id');
 
@@ -98,7 +99,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-function saveIncomeMovement() {
+async function saveIncomeMovement() {
     const amountInput = document.getElementById('montoInput');
     const dateInput = document.getElementById('fechaInput');
     const categorySelect = document.getElementById('categoriaSelect');
@@ -130,12 +131,12 @@ function saveIncomeMovement() {
     };
 
     if (movementId) {
-        updateMovement(movementId, movementData);
+        await updateMovement(movementId, movementData);
         window.location.href = 'movimientos.html?success=incomeUpdated';
         return;
     }
 
-    addMovement({
+    await addMovement({
         id: Date.now().toString(),
         ...movementData
     });

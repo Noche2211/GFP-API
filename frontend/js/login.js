@@ -170,11 +170,14 @@ function loadUserSettings() {
     const lastNameField = document.getElementById('configLastNameInput');
     const emailField = document.getElementById('configEmailInput');
     const genderField = document.getElementById('configGenderSelect');
+    const birthDateField = document.getElementById('configBirthDateInput');
+    const settings = JSON.parse(localStorage.getItem(`gfpUserSettings_${user.id}`) || '{}');
 
     if (nameField) nameField.value = firstName;
     if (lastNameField) lastNameField.value = lastName;
     if (emailField) emailField.value = user.email || '';
-    if (genderField) genderField.value = user.gender || '';
+    if (genderField) genderField.value = user.gender || settings.gender || '';
+    if (birthDateField) birthDateField.value = user.birthDate || settings.birthDate || '';
 }
 
 async function updateCurrentUser() {
@@ -187,6 +190,8 @@ async function updateCurrentUser() {
     const firstName = document.getElementById('configNameInput')?.value.trim();
     const lastName = document.getElementById('configLastNameInput')?.value.trim();
     const email = document.getElementById('configEmailInput')?.value.trim();
+    const gender = document.getElementById('configGenderSelect')?.value || '';
+    const birthDate = document.getElementById('configBirthDateInput')?.value || '';
     const name = lastName ? `${firstName} ${lastName}` : firstName;
 
     if (!firstName || !email) {
@@ -198,7 +203,7 @@ async function updateCurrentUser() {
         const response = await fetch(`${USERS_API_URL}/${user.id}`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ name, email })
+            body: JSON.stringify({ name, email, birthDate, gender })
         });
 
         const data = await response.json();
@@ -207,6 +212,7 @@ async function updateCurrentUser() {
         }
 
         setCurrentUser({ ...user, name, email });
+        setCurrentUser({ ...user, name, email, birthDate, gender });
         showConfigMessage('Datos actualizados con éxito.', false);
         loadUserProfile();
     } catch (error) {

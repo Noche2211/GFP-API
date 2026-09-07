@@ -2,8 +2,9 @@ const profileState = {
     selectedPeriod: 'month'
 };
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
     initializePeriodSelector();
+    await loadRemoteMovements();
     updateProfileTotals();
     window.addEventListener('storage', updateProfileTotals);
     window.addEventListener('focus', updateProfileTotals);
