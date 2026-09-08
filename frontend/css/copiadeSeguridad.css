@@ -317,8 +317,9 @@ body {
     justify-content: space-between;
     padding: 20px;
     background: white;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(79, 55, 138, 0.15);
+    border-radius: 18px;
+    box-shadow: 0 8px 24px rgba(79, 55, 138, 0.06);
 }
 
 .backup-info {
@@ -329,7 +330,7 @@ body {
 
 .backup-name {
     font-size: 16px;
-    font-weight: 500;
+    font-weight: 700;
     color: var(--primario);
 }
 
@@ -339,20 +340,21 @@ body {
     gap: 10px;
 }
 
-.backup-date input {
-    padding: 6px 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 14px;
-    color: #333;
-    background: white;
+.backup-info span,
+.backup-info small {
+    color: #777080;
+    font-size: 13px;
 }
 
 .download-btn {
-    background: transparent;
+    background: #F4F0FF;
+    color: var(--primario);
     border: none;
+    border-radius: 12px;
     cursor: pointer;
-    padding: 10px;
+    padding: 10px 14px;
+    font-size: 13px;
+    font-weight: 600;
     transition: transform 0.2s;
 }
 
@@ -360,10 +362,122 @@ body {
     transform: scale(1.1);
 }
 
-.download-icon {
-    width: 35px;
-    height: 35px;
+.no-backups-message {
+    margin: 28px 0;
     color: var(--primario);
+    text-align: center;
+}
+
+.backup-dialog {
+    position: fixed;
+    inset: 0;
+    z-index: 3000;
+    display: grid;
+    place-items: center;
+    padding: 20px;
+    background: rgba(45, 38, 64, .35);
+}
+
+.backup-dialog[hidden] {
+    display: none;
+}
+
+.backup-dialog-card {
+    position: relative;
+    width: min(100%, 520px);
+    padding: 28px;
+    border: 1px solid rgba(79, 55, 138, .15);
+    border-radius: 22px;
+    background: white;
+    box-shadow: 0 18px 50px rgba(45, 38, 64, .2);
+}
+
+.backup-dialog-card h2 {
+    margin: 0 0 8px;
+    color: var(--primario);
+    font-size: 24px;
+}
+
+.backup-dialog-card > p {
+    margin: 0 0 22px;
+    color: #777080;
+}
+
+.dialog-close {
+    position: absolute;
+    top: 14px;
+    right: 16px;
+    border: 0;
+    background: transparent;
+    color: var(--primario);
+    cursor: pointer;
+    font-size: 25px;
+}
+
+.backup-options {
+    display: grid;
+    gap: 10px;
+    margin-bottom: 22px;
+    color: var(--primario);
+}
+
+.backup-options label,
+.backup-form-grid label {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.backup-options input {
+    accent-color: var(--barras);
+}
+
+.backup-form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+}
+
+.backup-form-grid label:last-child {
+    grid-column: 1 / -1;
+}
+
+.backup-form-grid input,
+.backup-form-grid select {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: 7px;
+    padding: 11px 12px;
+    border: 1px solid #D8CFF0;
+    border-radius: 10px;
+    background: #FAF8FF;
+    color: var(--primario);
+}
+
+.backup-dialog-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 26px;
+}
+
+.dialog-cancel,
+.dialog-submit {
+    padding: 10px 16px;
+    border: 0;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.dialog-cancel {
+    background: #F4F0FF;
+    color: var(--primario);
+}
+
+.dialog-submit {
+    background: var(--primario);
+    color: white;
 }
 
 /* BARRA INFERIOR */
@@ -411,6 +525,13 @@ body {
     margin: 0 0px;
     opacity: 0;
     transition: all 0.3s ease;
+}
+
+@media (max-width: 560px) {
+    .backup-item { align-items: flex-start; gap: 12px; }
+    .backup-dialog-card { padding: 24px 18px; }
+    .backup-form-grid { grid-template-columns: 1fr; }
+    .backup-form-grid label:last-child { grid-column: auto; }
 }
 
 .bottom-bar .icon:hover .text,

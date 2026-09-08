@@ -50,7 +50,7 @@
 
     <!-- Contenedor principal -->
     <main class="content">
-        <div class="backup-header" onclick="generateBackup()">
+        <div class="backup-header" onclick="openBackupDialog()">
             <svg class="backup-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                 stroke-linecap="round" stroke-linejoin="round">
                 <path d="M19 18a3.5 3.5 0 0 0 0-7h-1.26A8 8 0 1 0 3 16.3"></path>
@@ -89,60 +89,32 @@
         <div class="history-section">
             <h2 class="history-title">Historial</h2>
 
-            <div class="backup-list">
-                <div class="backup-item">
-                    <div class="backup-info">
-                        <span class="backup-name">Copia de seguridad 01</span>
-                        <div class="backup-date">
-                            <input type="date" value="2025-05-01" readonly>
-                        </div>
-                    </div>
-                    <button class="download-btn" onclick="downloadBackup(1)">
-                        <svg class="download-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2">
-                            <path d="M3 17v3a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-3"></path>
-                            <polyline points="8 12 12 16 16 12"></polyline>
-                            <line x1="12" y1="2" x2="12" y2="16"></line>
-                        </svg>
-                    </button>
-                </div>
-
-                <div class="backup-item">
-                    <div class="backup-info">
-                        <span class="backup-name">Copia de seguridad 02</span>
-                        <div class="backup-date">
-                            <input type="date" value="2025-06-25" readonly>
-                        </div>
-                    </div>
-                    <button class="download-btn" onclick="downloadBackup(2)">
-                        <svg class="download-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2">
-                            <path d="M3 17v3a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-3"></path>
-                            <polyline points="8 12 12 16 16 12"></polyline>
-                            <line x1="12" y1="2" x2="12" y2="16"></line>
-                        </svg>
-                    </button>
-                </div>
-
-                <div class="backup-item">
-                    <div class="backup-info">
-                        <span class="backup-name">Copia de seguridad 03</span>
-                        <div class="backup-date">
-                            <input type="date" value="2025-07-01" readonly>
-                        </div>
-                    </div>
-                    <button class="download-btn" onclick="downloadBackup(3)">
-                        <svg class="download-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2">
-                            <path d="M3 17v3a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-3"></path>
-                            <polyline points="8 12 12 16 16 12"></polyline>
-                            <line x1="12" y1="2" x2="12" y2="16"></line>
-                        </svg>
-                    </button>
-                </div>
-            </div>
+            <div id="backupList" class="backup-list"></div>
+            <p id="noBackupsMessage" class="no-backups-message">Aún no has generado copias de seguridad.</p>
         </div>
     </main>
+
+    <div id="backupDialog" class="backup-dialog" hidden>
+        <form id="backupForm" class="backup-dialog-card">
+            <button type="button" class="dialog-close" onclick="closeBackupDialog()">×</button>
+            <h2>Generar copia de seguridad</h2>
+            <p>Selecciona la información que quieres conservar.</p>
+            <div class="backup-options">
+                <label><input type="checkbox" name="backupType" value="movements" checked> Movimientos</label>
+                <label><input type="checkbox" name="backupType" value="budgets" checked> Presupuestos</label>
+                <label><input type="checkbox" name="backupType" value="goals" checked> Metas</label>
+            </div>
+            <div class="backup-form-grid">
+                <label>Desde<input id="backupDateFrom" type="date"></label>
+                <label>Hasta<input id="backupDateTo" type="date"></label>
+                <label>Formato<select id="backupFormat"><option value="csv">CSV</option><option value="pdf">PDF</option></select></label>
+            </div>
+            <div class="backup-dialog-actions">
+                <button type="button" class="dialog-cancel" onclick="closeBackupDialog()">Cancelar</button>
+                <button type="submit" class="dialog-submit">Generar copia</button>
+            </div>
+        </form>
+    </div>
 
     <!-- Barra inferior -->
     <nav class="bottom-bar">
@@ -168,6 +140,14 @@
     </nav>
 
     <script src="../js/main.js"></script>
+    <script src="../js/config.js"></script>
+    <script src="../js/dataApi.js"></script>
+    <script src="../js/movementStorage.js"></script>
+    <script src="../js/budgetStorage.js"></script>
+    <script src="../js/goalStorage.js"></script>
+    <script src="../js/backupStorage.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
     <script src="../js/copiadeSeguridad.js"></script>
 </body>
 

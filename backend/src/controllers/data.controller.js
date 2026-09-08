@@ -1,6 +1,6 @@
 const db = require('../config/database');
 
-const allowedResources = new Set(['movements', 'budgets', 'goals']);
+const allowedResources = new Set(['movements', 'budgets', 'goals', 'backups']);
 
 function assertResource(resource) {
     if (!allowedResources.has(resource)) throw new Error('Recurso no permitido.');
