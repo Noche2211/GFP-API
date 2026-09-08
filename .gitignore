@@ -11,3 +11,12 @@ node_modules/
 *.sqlite
 *.sqlite-shm
 *.sqlite-wal
+
+# Local and generated test files
+tests/
+playwright.config.js
+movement.integration.test.js
+movement.integration.test.cjs
+
+# Optional desktop entry point not used by the web deployment
+main.js
