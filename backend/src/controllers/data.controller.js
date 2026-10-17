@@ -1,9 +1,21 @@
 const db = require('../config/database');
 
 const allowedResources = new Set(['movements', 'budgets', 'goals', 'backups']);
+const MAX_AMOUNT = 22000000000.22;
+const AMOUNT_FIELDS = ['amount', 'monto', 'montoObjetivo', 'montoAhorrado'];
 
 function assertResource(resource) {
     if (!allowedResources.has(resource)) throw new Error('Recurso no permitido.');
+}
+
+function assertAmountsWithinLimit(data) {
+    for (const field of AMOUNT_FIELDS) {
+        if (data[field] === undefined || data[field] === null || data[field] === '') continue;
+        const value = Number(data[field]);
+        if (!Number.isNaN(value) && value > MAX_AMOUNT) {
+            throw new Error(`El monto no puede ser mayor a ${MAX_AMOUNT.toFixed(2)}.`);
+        }
+    }
 }
 
 exports.list = (req, res) => {
@@ -22,6 +34,7 @@ exports.save = (req, res) => {
         if (!userId || !id) return res.status(400).json({ message: 'Faltan usuario o identificador.' });
         const user = db.prepare('SELECT id FROM users WHERE id = ?').get(userId);
         if (!user) return res.status(401).json({ message: 'La sesión no es válida en Render. Cierra sesión e inicia sesión nuevamente.' });
+        assertAmountsWithinLimit(data);
         const serialized = JSON.stringify(data);
         const existing = db.prepare('SELECT id FROM app_data WHERE id = ? AND resource = ? AND user_id = ?').get(id, resource, userId);
         if (existing) {

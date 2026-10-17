@@ -25,7 +25,7 @@ async function loadRemoteMovements() {
 }
 
 async function addMovement(movement) {
-    if (typeof saveRemoteData === 'function' && currentUserId()) await saveRemoteData('movements', movement);
+    if (typeof saveRemoteData === 'function') await saveRemoteData('movements', movement);
     const movements = getMovements();
     movements.unshift(movement);
     saveMovements(movements);
@@ -36,7 +36,7 @@ function getMovementById(id) {
 }
 
 async function updateMovement(id, movement) {
-    if (typeof saveRemoteData === 'function' && currentUserId()) await saveRemoteData('movements', { ...movement, id });
+    if (typeof saveRemoteData === 'function') await saveRemoteData('movements', { ...movement, id });
     const movements = getMovements();
     const index = movements.findIndex(item => item.id === id);
     if (index === -1) return false;
@@ -92,7 +92,7 @@ function getMovementTotals(period = 'month') {
     return movements.reduce(
         (totals, movement) => {
             if (!isInPeriod(movement.date)) return totals;
-            const amount = Number(String(movement.amount).replace(/\./g, '').replace(/,/g, '.')) || 0;
+            const amount = Number(movement.amount) || 0;
             if (movement.type === 'expense') {
                 totals.expense += amount;
             } else {
@@ -106,8 +106,7 @@ function getMovementTotals(period = 'month') {
 
 function formatMoney(value) {
     if (value === null || value === undefined || value === '') return '0,00';
-    const normalized = String(value).replace(/\./g, '').replace(/,/g, '.');
-    const amount = Number(normalized);
+    const amount = Number(value);
     if (Number.isNaN(amount)) return '0,00';
     const parts = amount.toFixed(2).split('.');
     parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, '.');

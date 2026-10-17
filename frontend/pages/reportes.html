@@ -53,207 +53,16 @@
         <h1>Reportes</h1>
 
         <div class="reports-grid">
-            <!-- COLUMNA MOVIMIENTOS -->
-            <div class="report-column">
+            <div class="report-column" id="movementsReportColumn">
                 <h2 class="column-title">Movimientos</h2>
-
-                <h3 class="section-title">Ingresos</h3>
-                <div class="report-item">
-                    <svg class="icon income" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                        <circle cx="12" cy="12" r="10" />
-                    </svg>
-                    <div class="details">
-                        <div class="amount">1.000.000,00</div>
-                        <div class="description">Trabajo<br>Bono por cumplimiento de metas</div>
-                    </div>
-                    <div class="date">12/06/2025</div>
-                </div>
-                <div class="report-item">
-                    <svg class="icon income" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                        <circle cx="12" cy="12" r="10" />
-                    </svg>
-                    <div class="details">
-                        <div class="amount">1.000.000,00</div>
-                        <div class="description">Trabajo<br>Bono por cumplimiento de metas</div>
-                    </div>
-                    <div class="date">12/06/2025</div>
-                </div>
-                <div class="report-item">
-                    <svg class="icon income" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                        <circle cx="12" cy="12" r="10" />
-                    </svg>
-                    <div class="details">
-                        <div class="amount">1.000.000,00</div>
-                        <div class="description">Trabajo<br>Bono por cumplimiento de metas</div>
-                    </div>
-                    <div class="date">12/06/2025</div>
-                </div>
-
-                <h3 class="section-title">Gastos</h3>
-                <div class="report-item">
-                    <svg class="icon expense" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                        <circle cx="12" cy="12" r="10" />
-                    </svg>
-                    <div class="details">
-                        <div class="amount">100.000,00</div>
-                        <div class="description">Servicios<br>Pago de servicios de luz</div>
-                    </div>
-                    <div class="date">12/06/2025</div>
-                </div>
-                <div class="report-item">
-                    <svg class="icon expense" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                        <circle cx="12" cy="12" r="10" />
-                    </svg>
-                    <div class="details">
-                        <div class="amount">100.000,00</div>
-                        <div class="description">Servicios<br>Pago de servicios de luz</div>
-                    </div>
-                    <div class="date">12/06/2025</div>
-                </div>
-                <div class="report-item">
-                    <svg class="icon expense" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                        <circle cx="12" cy="12" r="10" />
-                    </svg>
-                    <div class="details">
-                        <div class="amount">100.000,00</div>
-                        <div class="description">Servicios<br>Pago de servicios de luz</div>
-                    </div>
-                    <div class="date">12/06/2025</div>
-                </div>
             </div>
 
-            <!-- COLUMNA PRESUPUESTOS -->
-            <div class="report-column">
+            <div class="report-column" id="budgetsReportColumn">
                 <h2 class="column-title">Presupuestos</h2>
-
-                <div class="budget-item">
-                    <svg class="edit-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                        stroke-width="2">
-                        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
-                        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
-                    </svg>
-                    <div class="info">
-                        <div class="title">900.000,00 | Concierto</div>
-                        <div class="subtitle">Presupuesto para el concierto de Caramelos de cianura</div>
-                        <div class="frequency">Ocio</div>
-                        <span class="category">Una vez</span>
-                    </div>
-                </div>
-
-                <div class="budget-item">
-                    <svg class="edit-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                        stroke-width="2">
-                        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
-                        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
-                    </svg>
-                    <div class="info">
-                        <div class="title">200.000,00 | Licuadora</div>
-                        <div class="subtitle">Presupuesto para una licuadora nueva</div>
-                        <div class="frequency">Hogar</div>
-                        <span class="category">Una vez</span>
-                    </div>
-                </div>
-
-                <div class="budget-item">
-                    <svg class="edit-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                        stroke-width="2">
-                        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
-                        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
-                    </svg>
-                    <div class="info">
-                        <div class="title">150.000,00 | Pasajes</div>
-                        <div class="subtitle">Presupuesto para viaje del bus y el metro</div>
-                        <div class="frequency">Transporte</div>
-                        <span class="category">Semanal</span>
-                    </div>
-                </div>
-
-                <div class="budget-item">
-                    <svg class="edit-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                        stroke-width="2">
-                        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
-                        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
-                    </svg>
-                    <div class="info">
-                        <div class="title">400.000,00 | Luz y agua</div>
-                        <div class="subtitle">Presupuesto para los servicios del apartamento</div>
-                        <div class="frequency">Servicios</div>
-                        <span class="category">Mensual</span>
-                    </div>
-                </div>
             </div>
 
-            <!-- COLUMNA METAS -->
-            <div class="report-column">
+            <div class="report-column" id="goalsReportColumn">
                 <h2 class="column-title">Metas</h2>
-
-                <div class="goal-item">
-                    <svg class="star-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                        stroke-width="2">
-                        <polygon
-                            points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
-                        </polygon>
-                    </svg>
-                    <div class="info">
-                        <div class="title">Telefono</div>
-                        <div class="frequency">Una vez</div>
-                        <div class="progress-info">Monto ahorrado: $1.700.000 - $3.000.000</div>
-                        <div class="progress-bar">
-                            <div class="progress-fill" style="width: 57%;"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="goal-item">
-                    <svg class="star-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                        stroke-width="2">
-                        <polygon
-                            points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
-                        </polygon>
-                    </svg>
-                    <div class="info">
-                        <div class="title">Moto</div>
-                        <div class="frequency">Una vez</div>
-                        <div class="progress-info">Monto ahorrado: $3.550.000 - $15.000.000</div>
-                        <div class="progress-bar">
-                            <div class="progress-fill" style="width: 24%;"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="goal-item">
-                    <svg class="star-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                        stroke-width="2">
-                        <polygon
-                            points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
-                        </polygon>
-                    </svg>
-                    <div class="info">
-                        <div class="title">Operación</div>
-                        <div class="frequency">Una vez</div>
-                        <div class="progress-info">Monto ahorrado: $630.000 - $2.000.000</div>
-                        <div class="progress-bar">
-                            <div class="progress-fill" style="width: 32%;"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="goal-item">
-                    <svg class="star-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                        stroke-width="2">
-                        <polygon
-                            points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
-                        </polygon>
-                    </svg>
-                    <div class="info">
-                        <div class="title">Gimnasio para el gato</div>
-                        <div class="frequency">Una vez</div>
-                        <div class="progress-info">Monto ahorrado: $250.000 - $300.000</div>
-                        <div class="progress-bar">
-                            <div class="progress-fill" style="width: 83%;"></div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
 
@@ -274,23 +83,32 @@
                     <select id="exportFormat">
                         <option value="csv">CSV</option>
                         <option value="pdf">PDF</option>
-                        <option value="excel">Excel</option>
                     </select>
                 </div>
 
                 <div class="form-field">
                     <label>Rango de fechas</label>
-                    <input type="text" id="dateRange" value="01/02/2025 - 13/05/2025" readonly>
+                    <div class="report-date-range">
+                        <input type="date" id="reportDateFrom">
+                        <input type="date" id="reportDateTo">
+                    </div>
                 </div>
 
                 <div class="form-field">
                     <label>Reportes de:</label>
-                    <textarea id="reportTypes" readonly>Movimientos - Presupuestos</textarea>
+                    <div class="report-type-options">
+                        <label><input type="checkbox" name="reportType" value="movements" checked> Movimientos</label>
+                        <label><input type="checkbox" name="reportType" value="budgets" checked> Presupuestos</label>
+                        <label><input type="checkbox" name="reportType" value="goals" checked> Metas</label>
+                    </div>
                 </div>
 
                 <div class="form-field">
                     <label>Guardar la carpeta:</label>
-                    <input type="text" id="savePath" value="D:\User data\Documents\Reportes" readonly>
+                    <div class="save-path-control">
+                        <input type="text" id="savePath" value="Descarga predeterminada" readonly>
+                        <button type="button" class="choose-folder-btn" onclick="chooseReportFolder()">Elegir carpeta</button>
+                    </div>
                 </div>
 
                 <div class="modal-actions">
@@ -325,6 +143,13 @@
     </nav>
 
     <script src="../js/main.js"></script>
+    <script src="../js/config.js"></script>
+    <script src="../js/dataApi.js"></script>
+    <script src="../js/movementStorage.js"></script>
+    <script src="../js/budgetStorage.js"></script>
+    <script src="../js/goalStorage.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
     <script src="../js/reportes.js"></script>
 </body>
 

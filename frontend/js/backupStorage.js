@@ -21,7 +21,7 @@ async function loadRemoteBackups() {
 }
 
 async function saveBackup(backup) {
-    if (typeof saveRemoteData === 'function' && currentUserId()) {
+    if (typeof saveRemoteData === 'function') {
         await saveRemoteData('backups', backup);
     }
     const backups = getBackups().filter(item => item.id !== backup.id);

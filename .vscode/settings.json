@@ -1,0 +1,7 @@
+{
+  "explorer.excludeGitIgnore": false,
+  "files.exclude": {
+    "**/.env": true,
+    "**/node_modules": true
+  }
+}

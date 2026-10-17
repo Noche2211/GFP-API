@@ -6,7 +6,7 @@
  - Carga datos cuando se edita un presupuesto y guarda en localStorage.
 */
 
-const MAX_BUDGET_AMOUNT = 2222222222222;
+const MAX_BUDGET_AMOUNT = 22000000000.22;
 
 document.addEventListener('DOMContentLoaded', async () => {
     await loadRemoteBudgets();

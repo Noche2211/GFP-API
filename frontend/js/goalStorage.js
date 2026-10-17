@@ -25,14 +25,14 @@ async function loadRemoteGoals() {
 }
 
 async function addGoal(goal) {
-    if (typeof saveRemoteData === 'function' && currentUserId()) await saveRemoteData('goals', goal);
+    if (typeof saveRemoteData === 'function') await saveRemoteData('goals', goal);
     const goals = getGoals();
     goals.unshift(goal);
     saveGoals(goals);
 }
 
 async function updateGoal(updatedGoal) {
-    if (typeof saveRemoteData === 'function' && currentUserId()) await saveRemoteData('goals', updatedGoal);
+    if (typeof saveRemoteData === 'function') await saveRemoteData('goals', updatedGoal);
     const goals = getGoals().map(goal => goal.id === updatedGoal.id ? updatedGoal : goal);
     saveGoals(goals);
 }

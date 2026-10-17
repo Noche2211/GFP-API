@@ -5,7 +5,15 @@
  - `hideNotification()` oculta notificaciones de éxito (`successNotification`).
 */
 
+const MAX_MONTO = 22000000000.22;
+
 document.addEventListener('DOMContentLoaded', async () => {
+    // El formulario permanece deshabilitado mientras se cargan los movimientos remotos:
+    // en modo edición los valores existentes se precargan justo después de este fetch,
+    // y si el usuario ya hubiera escrito algo, esa carga lo sobrescribiría en silencio.
+    const formFields = Array.from(document.querySelectorAll('.form-input, .textarea-input, .btn-guardar'));
+    formFields.forEach(field => { field.disabled = true; });
+
     await loadRemoteMovements();
     const params = new URLSearchParams(window.location.search);
     const editMovementId = params.get('id');
@@ -49,6 +57,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const montoInput = document.getElementById('montoInput');
     if (montoInput) {
         montoInput.addEventListener('input', function (e) {
+            const previousValue = this.dataset.previousValue || '';
             let valor = this.value.replace(/[^0-9,]/g, '');
             const partes = valor.split(',');
             if (partes.length > 2) {
@@ -63,10 +72,19 @@ document.addEventListener('DOMContentLoaded', async () => {
             }
             if (decimal !== undefined) {
                 decimal = decimal.substring(0, 2);
-                this.value = entero + ',' + decimal;
+                valor = entero + ',' + decimal;
             } else {
-                this.value = entero || '';
+                valor = entero || '';
             }
+
+            const numericValue = Number(valor.replace(/\./g, '').replace(',', '.')) || 0;
+            if (numericValue > MAX_MONTO) {
+                this.value = previousValue;
+                return;
+            }
+
+            this.dataset.previousValue = valor;
+            this.value = valor;
         });
     }
 
@@ -97,6 +115,8 @@ document.addEventListener('DOMContentLoaded', async () => {
             refreshInputStyles();
         }
     }
+
+    formFields.forEach(field => { field.disabled = false; });
 });
 
 async function saveIncomeMovement() {
@@ -116,6 +136,11 @@ async function saveIncomeMovement() {
 
     if (!amount || !date || !category) {
         alert('Por favor completa los campos de monto, fecha y categoría.');
+        return;
+    }
+
+    if (amount > MAX_MONTO) {
+        alert(`El monto no puede ser mayor a ${MAX_MONTO.toLocaleString('es-CO', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}.`);
         return;
     }
 

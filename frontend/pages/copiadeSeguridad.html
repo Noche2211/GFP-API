@@ -98,17 +98,12 @@
         <form id="backupForm" class="backup-dialog-card">
             <button type="button" class="dialog-close" onclick="closeBackupDialog()">×</button>
             <h2>Generar copia de seguridad</h2>
-            <p>Selecciona la información que quieres conservar.</p>
-            <div class="backup-options">
-                <label><input type="checkbox" name="backupType" value="movements" checked> Movimientos</label>
-                <label><input type="checkbox" name="backupType" value="budgets" checked> Presupuestos</label>
-                <label><input type="checkbox" name="backupType" value="goals" checked> Metas</label>
+            <p>Se guardarán los datos y la configuración de tu cuenta en un respaldo completo.</p>
+            <div class="backup-account-scope">
+                <span>Incluye</span>
+                <strong>Perfil, configuración, movimientos, presupuestos y metas</strong>
             </div>
-            <div class="backup-form-grid">
-                <label>Desde<input id="backupDateFrom" type="date"></label>
-                <label>Hasta<input id="backupDateTo" type="date"></label>
-                <label>Formato<select id="backupFormat"><option value="csv">CSV</option><option value="pdf">PDF</option></select></label>
-            </div>
+            <input id="backupFormat" type="hidden" value="json">
             <div class="backup-dialog-actions">
                 <button type="button" class="dialog-cancel" onclick="closeBackupDialog()">Cancelar</button>
                 <button type="submit" class="dialog-submit">Generar copia</button>
@@ -142,6 +137,7 @@
     <script src="../js/main.js"></script>
     <script src="../js/config.js"></script>
     <script src="../js/dataApi.js"></script>
+    <script src="../js/login.js"></script>
     <script src="../js/movementStorage.js"></script>
     <script src="../js/budgetStorage.js"></script>
     <script src="../js/goalStorage.js"></script>

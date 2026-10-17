@@ -403,6 +403,17 @@ body {
     color: #777080;
 }
 
+.backup-account-scope {
+    display: grid;
+    gap: 5px;
+    margin-bottom: 22px;
+    padding: 14px;
+    border-radius: 12px;
+    background: #F4F0FF;
+    color: var(--primario);
+    font-size: 14px;
+}
+
 .dialog-close {
     position: absolute;
     top: 14px;

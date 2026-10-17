@@ -29,14 +29,14 @@ async function loadRemoteBudgets() {
 }
 
 async function addBudget(budget) {
-    if (typeof saveRemoteData === 'function' && currentUserId()) await saveRemoteData('budgets', budget);
+    if (typeof saveRemoteData === 'function') await saveRemoteData('budgets', budget);
     const budgets = getBudgets();
     budgets.unshift(budget);
     saveBudgets(budgets);
 }
 
 async function updateBudget(updatedBudget) {
-    if (typeof saveRemoteData === 'function' && currentUserId()) await saveRemoteData('budgets', updatedBudget);
+    if (typeof saveRemoteData === 'function') await saveRemoteData('budgets', updatedBudget);
     const budgets = getBudgets().map(budget => budget.id === updatedBudget.id ? updatedBudget : budget);
     saveBudgets(budgets);
 }

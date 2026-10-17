@@ -6,10 +6,13 @@
  - `hideError()`: oculta el mensaje de error.
 */
 
+const MAX_MONTO = 22000000000.22;
+
 // Formateo de Montos (Puntos y Comas)
 function formatMoneda(input) {
     if (input) {
         input.addEventListener('input', function (e) {
+            const previousValue = this.dataset.previousValue || '';
             let valor = this.value.replace(/[^0-9,]/g, '');
             const partes = valor.split(',');
             if (partes.length > 2) {
@@ -24,10 +27,19 @@ function formatMoneda(input) {
             }
             if (decimal !== undefined) {
                 decimal = decimal.substring(0, 2);
-                this.value = entero + ',' + decimal;
+                valor = entero + ',' + decimal;
             } else {
-                this.value = entero || '';
+                valor = entero || '';
             }
+
+            const numericValue = Number(valor.replace(/\./g, '').replace(',', '.')) || 0;
+            if (numericValue > MAX_MONTO) {
+                this.value = previousValue;
+                return;
+            }
+
+            this.dataset.previousValue = valor;
+            this.value = valor;
         });
     }
 }
@@ -96,6 +108,11 @@ async function saveGoal() {
 
     if (!name || !targetAmount || !date) {
         alert('Por favor completa el nombre, el monto objetivo y la fecha.');
+        return false;
+    }
+
+    if (targetAmount > MAX_MONTO || savedAmount > MAX_MONTO) {
+        alert(`El monto no puede ser mayor a ${formatGoalMoney(MAX_MONTO)}.`);
         return false;
     }
 

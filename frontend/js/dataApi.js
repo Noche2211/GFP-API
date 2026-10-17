@@ -7,6 +7,10 @@ async function readApiResponse(response, fallbackMessage) {
         : null;
 
     if (!response.ok) {
+        if (response.status === 401) {
+            localStorage.removeItem('currentUser');
+            throw new Error('Tu sesión ya no es válida en Render. Inicia sesión nuevamente para guardar tus datos.');
+        }
         if (response.status === 404) {
             throw new Error(`${fallbackMessage} Render no tiene disponible esta ruta. Verifica que el último despliegue incluya la API de datos.`);
         }

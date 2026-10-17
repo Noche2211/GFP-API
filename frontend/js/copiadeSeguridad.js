@@ -18,18 +18,12 @@ function closeBackupDialog() {
 
 async function handleBackupSubmit(event) {
     event.preventDefault();
-    const selectedTypes = [...document.querySelectorAll('input[name="backupType"]:checked')].map(input => input.value);
-    if (!selectedTypes.length) {
-        showBackupError('Selecciona al menos un tipo de dato.');
-        return;
-    }
-
     const notification = document.getElementById('backupNotification');
     notification?.classList.add('show');
     try {
-        const format = document.getElementById('backupFormat').value;
-        const sections = buildBackupSections(selectedTypes);
-        const payload = format === 'csv' ? buildCsv(sections) : JSON.stringify({ generatedAt: new Date().toISOString(), sections });
+        const format = 'json';
+        const accountBackup = buildAccountBackup();
+        const payload = JSON.stringify(accountBackup, null, 2);
         const number = getBackups().length + 1;
         const backup = {
             id: `backup-${Date.now()}`,
@@ -37,17 +31,39 @@ async function handleBackupSubmit(event) {
             createdAt: new Date().toISOString(),
             format,
             payload,
-            summary: selectedTypes.map(type => `${type}: ${sections[type].length}`).join(' | ')
+            summary: 'Perfil y configuración · Movimientos · Presupuestos · Metas'
         };
         await saveBackup(backup);
         closeBackupDialog();
         renderBackups();
-        showToast('Copia de seguridad guardada', `Tu archivo ${format.toUpperCase()} está listo para descargar.`);
+        showToast('Copia de seguridad guardada', 'Tu copia completa está lista para descargar.');
     } catch (error) {
         showBackupError(error.message);
     } finally {
         closeNotification();
     }
+}
+
+function buildAccountBackup() {
+    const user = typeof getCurrentUser === 'function' ? getCurrentUser() : null;
+    if (!user?.id) throw new Error('Inicia sesión para crear una copia de tu cuenta.');
+    const settings = JSON.parse(localStorage.getItem(`gfpUserSettings_${user.id}`) || '{}');
+    return {
+        backupVersion: 1,
+        generatedAt: new Date().toISOString(),
+        account: {
+            id: user.id,
+            name: user.name || '',
+            email: user.email || '',
+            birthDate: user.birthDate || settings.birthDate || '',
+            gender: user.gender || settings.gender || ''
+        },
+        data: {
+            movements: getMovements(),
+            budgets: getBudgets(),
+            goals: getGoals()
+        }
+    };
 }
 
 function buildBackupSections(types) {
@@ -94,8 +110,7 @@ function renderBackups() {
     backups.forEach(backup => {
         const item = document.createElement('article');
         item.className = 'backup-item';
-        const format = (backup.format || 'csv').toUpperCase();
-        item.innerHTML = `<div class="backup-info"><strong>${escapeBackupText(backup.label)}</strong><span>${formatBackupDate(backup.createdAt)}</span><small>${escapeBackupText(backup.summary || 'Respaldo guardado')} · ${format}</small></div><button class="download-btn" type="button" aria-label="Descargar ${escapeBackupText(backup.label)}">Descargar</button>`;
+        item.innerHTML = `<div class="backup-info"><strong>${escapeBackupText(backup.label)}</strong><span>${formatBackupDate(backup.createdAt)}</span><small>${escapeBackupText(backup.summary || 'Respaldo guardado')} · Copia completa</small></div><button class="download-btn" type="button" aria-label="Descargar ${escapeBackupText(backup.label)}">Descargar</button>`;
         item.querySelector('.download-btn').addEventListener('click', () => downloadBackup(backup.id));
         list.appendChild(item);
     });
