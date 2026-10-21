@@ -139,6 +139,15 @@ function formatMovementDate(dateString) {
     return date.toLocaleDateString('es-CO');
 }
 
+// Permite comparar categorías sin distinguir mayúsculas ni tildes (p. ej. 'Alimentación' y 'alimentacion')
+function normalizeCategory(value) {
+    return String(value || '')
+        .trim()
+        .toLowerCase()
+        .normalize('NFD')
+        .replace(/[̀-ͯ]/g, '');
+}
+
 function formatMovementCategory(value) {
     if (!value) return 'Sin categoría';
     return value.charAt(0).toUpperCase() + value.slice(1);

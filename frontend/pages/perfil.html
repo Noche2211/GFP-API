@@ -84,10 +84,10 @@
                 </div>
                 <div class="card-row">
                     <div class="progress green-bg">
-                        <div class="progress-fill" style="width:80%"></div>
+                        <div class="progress-fill" id="incomeProgressFill" style="width:0%"></div>
                     </div>
                     <div class="progress red-bg">
-                        <div class="progress-fill red-fill" style="width:10%"></div>
+                        <div class="progress-fill red-fill" id="expenseProgressFill" style="width:0%"></div>
                     </div>
                 </div>
             </div>
@@ -97,24 +97,40 @@
                 <h3>Balance General</h3>
                 <p id="balanceAmountValue" class="balance-amount">$ 0,00</p>
                 <div class="balance-bar">
-                    <div class="balance-fill" style="width:75%"></div>
+                    <div class="balance-fill" id="balanceProgressFill" style="width:0%"></div>
                 </div>
             </div>
         </div>
 
-        <!-- Progreso de Metas -->
-        <div class="bottom-card">
-            <h3>Progreso de Metas</h3>
+        <!-- Tarjetas inferiores -->
+        <div class="bottom-cards">
+            <!-- Progreso de Metas -->
+            <div class="bottom-card">
+                <h3>Progreso de Metas</h3>
 
-            <div class="progress-bar">
-                <div class="progress-track">
-                    <div class="purple-fill" style="width:65%"></div>
+                <ul class="progress-list" id="goalsProgressList"></ul>
+
+                <div class="card-empty" id="noGoalsMessage">
+                    <p>Aún no tienes metas registradas.</p>
+                    <a href="crearMeta.html" class="card-empty-link">Crear una meta</a>
                 </div>
-                <span class="progress-label">65%</span>
+
+                <div class="chart-placeholder" id="goalsPlaceholder">
+                    <img src="../img/perfil.svg" alt="Gráfica de metas" />
+                </div>
             </div>
 
-            <div class="chart-placeholder">
-                <img src="../img/perfil.svg" alt="Gráfica de metas" />
+            <!-- Presupuestos -->
+            <div class="bottom-card budgets">
+                <h3>Presupuestos</h3>
+                <p class="card-subtitle">Gastado en el periodo actual de cada presupuesto</p>
+
+                <ul class="progress-list" id="budgetsProgressList"></ul>
+
+                <div class="card-empty" id="noBudgetsMessage">
+                    <p>Aún no tienes presupuestos registrados.</p>
+                    <a href="crearPresupuesto.html" class="card-empty-link">Crear un presupuesto</a>
+                </div>
             </div>
         </div>
 
@@ -148,6 +164,8 @@
     <script src="../js/dataApi.js"></script>
     <script src="../js/login.js"></script>
     <script src="../js/movementStorage.js"></script>
+    <script src="../js/goalStorage.js"></script>
+    <script src="../js/budgetStorage.js"></script>
     <script src="../js/perfil.js"></script>
 
 </body>

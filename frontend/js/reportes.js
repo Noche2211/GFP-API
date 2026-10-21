@@ -218,7 +218,7 @@ function renderMovementSection(title, movements, type) {
 }
 
 function renderBudget(budget) {
-    const spent = getMovements().filter(movement => movement.type === 'expense' && movement.category === budget.categoria).reduce((total, movement) => total + parseReportAmount(movement.amount), 0);
+    const spent = getBudgetSpent(budget);
     return `<div class="budget-item"><span class="report-symbol">$</span><div class="info"><div class="title">$ ${formatMoney(budget.monto)} | ${escapeReportText(budget.nombre)}</div><div class="subtitle">${escapeReportText(budget.descripcion || 'Sin descripción')}</div><div class="frequency">${escapeReportText(budget.categoria || 'General')}</div><span class="category">${escapeReportText(budget.periodo || 'Sin periodo')}</span><div class="budget-spent">Gastado: $ ${formatMoney(spent)} de $ ${formatMoney(budget.monto)}</div></div></div>`;
 }
 
