@@ -214,20 +214,6 @@ body {
     width: 420px;
 }
 
-.card-subtitle {
-    margin: -8px 0 0;
-    font-size: 13px;
-    color: #4D4D4D;
-}
-
-.chart-placeholder img {
-    display: block;
-    width: 100%;
-    max-width: 200px;
-    margin: 16px auto 0;
-    border-radius: 10px;
-}
-
 /* Evita que las reglas de display muestren elementos ocultos con el atributo hidden */
 [hidden] {
     display: none !important;
@@ -247,12 +233,6 @@ body {
     overflow-y: auto;
     scrollbar-width: thin;
     scrollbar-color: rgba(116, 90, 170, 0.35) transparent;
-}
-
-/* La card de presupuestos tiene un subtítulo, por eso su lista es un poco más baja */
-.budgets .progress-list {
-    margin-top: 16px;
-    max-height: max(160px, calc(100vh - 690px));
 }
 
 .progress-list::-webkit-scrollbar {
@@ -524,8 +504,7 @@ body {
         box-sizing: border-box;
     }
 
-    .progress-list,
-    .budgets .progress-list {
+    .progress-list {
         max-height: 320px;
     }
 }

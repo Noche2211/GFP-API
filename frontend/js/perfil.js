@@ -72,8 +72,6 @@ function updateProfileTotals() {
 
 function updateGoalsProgress() {
     const goals = getGoals().filter(goal => toPositiveAmount(goal.montoObjetivo) > 0);
-    const placeholder = document.getElementById('goalsPlaceholder');
-    if (placeholder) placeholder.hidden = goals.length > 0;
 
     // Una barra de progreso por cada meta registrada
     renderProgressList(
