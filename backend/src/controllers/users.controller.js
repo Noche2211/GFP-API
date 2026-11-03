@@ -5,17 +5,28 @@
 const db = require("../config/database");
 const bcrypt = require("bcryptjs");
 
+/**
+ * Traduce el error de correo duplicado (restricción UNIQUE de users.email)
+ * a un mensaje entendible para el usuario.
+ */
+function getUserErrorMessage(error) {
+    if (String(error.message).includes("UNIQUE constraint failed: users.email")) {
+        return "Este correo ya está registrado.";
+    }
+    return error.message;
+}
+
 exports.createUser = (req, res) => {
     try {
         const { name, email, password } = req.body;
         const hashedPassword = bcrypt.hashSync(password, 10);
-        
+
         const stmt = db.prepare(`INSERT INTO users (name, email, password) VALUES (?, ?, ?)`);
         const info = stmt.run(name, email, hashedPassword);
-        
+
         res.status(201).json({ message: "Usuario creado correctamente", id: info.lastInsertRowid });
     } catch (error) {
-        res.status(400).json({ message: error.message });
+        res.status(400).json({ message: getUserErrorMessage(error) });
     }
 };
 
@@ -94,7 +105,7 @@ exports.updateUser = (req, res) => {
 
         res.json({ message: "Usuario actualizado correctamente" });
     } catch (error) {
-        res.status(400).json({ message: error.message });
+        res.status(400).json({ message: getUserErrorMessage(error) });
     }
 };
 
