@@ -25,6 +25,9 @@ function showLoginNotification(message, isError = false) {
     const notification = document.getElementById('loginNotification');
     if (!notification) return;
 
+    // El título cambia según el resultado para no mostrar "Iniciando sesión..." en un error
+    const title = notification.querySelector('.notification-text strong');
+    if (title) title.textContent = isError ? 'No se pudo iniciar sesión' : 'Iniciando sesión...';
     const text = notification.querySelector('.notification-text p');
     if (text) text.textContent = message;
     notification.classList.add('show');

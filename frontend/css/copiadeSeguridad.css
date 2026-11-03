@@ -289,6 +289,18 @@ body {
     opacity: 1;
 }
 
+/* Variante de error: rojo, igual que en las demás páginas */
+.notification-download.error .notification-content {
+    background: #FBDCDC;
+    border: 1px solid #E76A6A;
+}
+
+.notification-download.error .notification-title,
+.notification-download.error .notification-subtitle,
+.notification-download.error .notification-close {
+    color: #B3261E;
+}
+
 /* HISTORY SECTION */
 .history-section {
     margin-top: 40px;

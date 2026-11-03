@@ -207,17 +207,19 @@ function escapeBackupText(value) {
     return element.innerHTML;
 }
 
-function showToast(title, subtitle) {
+function showToast(title, subtitle, isError = false) {
     const notification = document.getElementById('downloadNotification');
     if (!notification) return;
     notification.querySelector('.notification-title').textContent = title;
     notification.querySelector('.notification-subtitle').textContent = subtitle;
+    // Los errores se muestran en rojo para no confundirlos con una acción exitosa
+    notification.classList.toggle('error', isError);
     notification.classList.add('show');
     setTimeout(closeDownloadNotification, 5000);
 }
 
 function showBackupError(message) {
-    showToast('No se pudo guardar la copia', message);
+    showToast('No se pudo guardar la copia', message, true);
 }
 
 function closeNotification() {

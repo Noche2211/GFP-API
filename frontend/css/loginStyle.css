@@ -144,6 +144,12 @@ button:hover {
     animation: fadeIn 0.3s ease;
 }
 
+/* Los errores usan el mismo estilo rojo de las demás páginas; el verde queda solo para éxitos */
+.notification-toast.error {
+    background: #FBDCDC;
+    border: 1px solid #E76A6A;
+}
+
 .notification-content {
     display: flex;
     justify-content: space-between;

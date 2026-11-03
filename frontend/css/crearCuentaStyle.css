@@ -220,3 +220,24 @@ select:focus {
     left: 0;
     z-index: 10;
 }
+/* MENSAJES DE RESULTADO: rojo para errores y verde solo cuando la acción salió bien */
+.message.error,
+.message.success {
+    margin-top: 12px;
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-size: 14px;
+    text-align: center;
+}
+
+.message.error {
+    background: #FBDCDC;
+    border: 1px solid #E76A6A;
+    color: #B3261E;
+}
+
+.message.success {
+    background: #B8FCCA;
+    border: 1px solid #9AD9AE;
+    color: #1E6B35;
+}
