@@ -3,7 +3,7 @@
  Propósito: Resumen financiero de la página de perfil.
  - `updateProfileTotals()` muestra ingresos, gastos y balance del periodo elegido (mes, semana o día).
  - `updateGoalsProgress()` muestra una barra con el progreso real de cada meta de ahorro.
- - `updateBudgetsProgress()` muestra lo gastado en el periodo actual de cada presupuesto.
+ - `updateBudgetsProgress()` muestra lo que queda de cada presupuesto en su periodo actual.
 */
 
 // Porcentaje del presupuesto a partir del cual se considera en riesgo de excederse
@@ -97,13 +97,17 @@ function updateBudgetsProgress() {
         budgets.map(budget => {
             const amount = toPositiveAmount(budget.monto);
             const spent = getBudgetSpent(budget);
-            const percent = (spent / amount) * 100;
-            const status = getBudgetStatus(percent);
-            const statusText = { risk: ' · En riesgo', exceeded: ' · Excedido' }[status] || '';
+            const remaining = amount - spent;
+            // El estado depende de lo gastado; la barra muestra lo que queda y se vacía con cada gasto
+            const status = getBudgetStatus((spent / amount) * 100);
+            const period = budget.periodo || 'Sin periodo';
             return {
                 title: budget.nombre || 'Presupuesto sin nombre',
-                percent,
-                detail: `$ ${formatMoney(spent)} de $ ${formatMoney(amount)} · ${budget.periodo || 'Sin periodo'}${statusText}`,
+                percent: Math.max(0, (remaining / amount) * 100),
+                detail:
+                    remaining >= 0
+                        ? `Quedan $ ${formatMoney(remaining)} de $ ${formatMoney(amount)} · ${period}`
+                        : `Superado por $ ${formatMoney(-remaining)} · ${period}`,
                 status
             };
         })
