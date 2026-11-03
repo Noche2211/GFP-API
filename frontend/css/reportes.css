@@ -115,6 +115,12 @@ body {
     padding: 40px 30px 110px;
     max-width: 1200px;
     margin: 0 auto;
+    /* La página ocupa el alto de la pantalla y las columnas se desplazan por dentro */
+    box-sizing: border-box;
+    height: 100vh;
+    min-height: 560px;
+    display: flex;
+    flex-direction: column;
 }
 
 h1 {
@@ -133,13 +139,42 @@ h1 {
 .reports-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: minmax(0, 1fr);
     gap: 22px;
     margin-bottom: 20px;
+    flex: 1;
+    min-height: 0;
 }
 
 .report-column {
     display: flex;
     flex-direction: column;
+    min-height: 0;
+}
+
+/* Contenedor transparente de cada columna: los registros se desplazan aquí dentro */
+.report-scroll {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    background: transparent;
+    /* Espacio para que la sombra de las tarjetas no se corte en los bordes */
+    padding: 4px 10px 10px 4px;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(116, 90, 170, 0.35) transparent;
+}
+
+.report-scroll::-webkit-scrollbar {
+    width: 8px;
+}
+
+.report-scroll::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.report-scroll::-webkit-scrollbar-thumb {
+    background: rgba(116, 90, 170, 0.35);
+    border-radius: 999px;
 }
 
 .column-title {
@@ -595,7 +630,19 @@ h1 {
 
 /* RESPONSIVE */
 @media (max-width: 900px) {
+    /* En pantallas pequeñas las columnas van una debajo de otra y cada una tiene altura fija */
+    .content {
+        height: auto;
+        min-height: 0;
+    }
+
     .reports-grid {
         grid-template-columns: 1fr;
+        grid-template-rows: none;
+    }
+
+    .report-scroll {
+        flex: none;
+        max-height: 420px;
     }
 }

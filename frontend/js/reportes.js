@@ -186,19 +186,24 @@ function renderReports() {
     const budgetsColumn = document.getElementById('budgetsReportColumn');
     const goalsColumn = document.getElementById('goalsReportColumn');
 
+    // Cada columna envuelve sus registros en un contenedor que se desplaza por dentro
     if (movementsColumn) {
         const incomes = movements.filter(item => item.type === 'income');
         const expenses = movements.filter(item => item.type === 'expense');
-        movementsColumn.innerHTML = `<h2 class="column-title">Movimientos</h2>${renderMovementSection('Ingresos', incomes, 'income')}${renderMovementSection('Gastos', expenses, 'expense')}`;
+        movementsColumn.innerHTML = `<h2 class="column-title">Movimientos</h2>${wrapReportScroll(renderMovementSection('Ingresos', incomes, 'income') + renderMovementSection('Gastos', expenses, 'expense'))}`;
     }
 
     if (budgetsColumn) {
-        budgetsColumn.innerHTML = `<h2 class="column-title">Presupuestos</h2>${budgets.length ? budgets.map(renderBudget).join('') : emptyReport('No hay presupuestos registrados.')}`;
+        budgetsColumn.innerHTML = `<h2 class="column-title">Presupuestos</h2>${wrapReportScroll(budgets.length ? budgets.map(renderBudget).join('') : emptyReport('No hay presupuestos registrados.'))}`;
     }
 
     if (goalsColumn) {
-        goalsColumn.innerHTML = `<h2 class="column-title">Metas</h2>${goals.length ? goals.map(renderGoal).join('') : emptyReport('No hay metas registradas.')}`;
+        goalsColumn.innerHTML = `<h2 class="column-title">Metas</h2>${wrapReportScroll(goals.length ? goals.map(renderGoal).join('') : emptyReport('No hay metas registradas.'))}`;
     }
+}
+
+function wrapReportScroll(content) {
+    return `<div class="report-scroll">${content}</div>`;
 }
 
 function clearStaticReports() {
