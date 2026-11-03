@@ -11,7 +11,6 @@
     --primario: #4F378A;
     --verde: #57C27A;
     --rojo: #e76a6a;
-    --naranja: #e09a2d;
 }
 
 /* GENERAL */
@@ -285,24 +284,6 @@ body {
     margin: 6px 0 0;
     font-size: 13px;
     color: #4D4D4D;
-}
-
-/* ESTADOS DE LOS PRESUPUESTOS */
-.progress-item.is-risk .progress-item-track span {
-    background: var(--naranja);
-}
-
-.progress-item.is-risk .progress-item-percent {
-    color: var(--naranja);
-}
-
-.progress-item.is-exceeded .progress-item-track span {
-    background: var(--rojo);
-}
-
-.progress-item.is-exceeded .progress-item-percent,
-.progress-item.is-exceeded .progress-item-detail {
-    color: var(--rojo);
 }
 
 /* ESTADO SIN REGISTROS */

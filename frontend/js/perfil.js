@@ -6,9 +6,6 @@
  - `updateBudgetsProgress()` muestra lo que queda de cada presupuesto en su periodo actual.
 */
 
-// Porcentaje del presupuesto a partir del cual se considera en riesgo de excederse
-const BUDGET_RISK_PERCENT = 80;
-
 const profileState = {
     selectedPeriod: 'month'
 };
@@ -98,17 +95,15 @@ function updateBudgetsProgress() {
             const amount = toPositiveAmount(budget.monto);
             const spent = getBudgetSpent(budget);
             const remaining = amount - spent;
-            // El estado depende de lo gastado; la barra muestra lo que queda y se vacía con cada gasto
-            const status = getBudgetStatus((spent / amount) * 100);
             const period = budget.periodo || 'Sin periodo';
+            // La barra muestra lo que queda y se vacía con cada gasto
             return {
                 title: budget.nombre || 'Presupuesto sin nombre',
                 percent: Math.max(0, (remaining / amount) * 100),
                 detail:
                     remaining >= 0
                         ? `Quedan $ ${formatMoney(remaining)} de $ ${formatMoney(amount)} · ${period}`
-                        : `Superado por $ ${formatMoney(-remaining)} · ${period}`,
-                status
+                        : `Superado por $ ${formatMoney(-remaining)} · ${period}`
             };
         })
     );
@@ -126,11 +121,11 @@ function renderProgressList(listId, emptyMessageId, items) {
 }
 
 // Crea una fila con nombre, porcentaje, barra y detalle; se usa para metas y presupuestos
-function createProgressItem({ title, percent, detail, status }) {
+function createProgressItem({ title, percent, detail }) {
     const roundedPercent = Math.round(percent);
 
     const item = document.createElement('li');
-    item.className = status ? `progress-item is-${status}` : 'progress-item';
+    item.className = 'progress-item';
 
     const header = document.createElement('div');
     header.className = 'progress-item-header';
@@ -155,12 +150,6 @@ function createProgressItem({ title, percent, detail, status }) {
 
     item.append(header, track, detailEl);
     return item;
-}
-
-function getBudgetStatus(percent) {
-    if (percent > 100) return 'exceeded';
-    if (percent >= BUDGET_RISK_PERCENT) return 'risk';
-    return '';
 }
 
 // Los montos se guardan como número; se valida por si llegan vacíos o como texto
