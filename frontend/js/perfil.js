@@ -5,6 +5,7 @@
  - `updateGoalsProgress()` muestra una barra con el progreso real de cada meta de ahorro.
  - `updateBudgetsProgress()` muestra lo que queda de cada presupuesto en su periodo actual.
 */
+/* global formatMoney, getBudgetSpent, getBudgets, getGoals, getMovementTotals, loadRemoteBudgets, loadRemoteGoals, loadRemoteMovements */
 
 const profileState = {
     selectedPeriod: 'month'

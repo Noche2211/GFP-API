@@ -4,6 +4,8 @@
  - Gestiona estilos de inputs y formatea el campo de monto mientras el usuario escribe.
  - `hideNotification()` oculta notificaciones de éxito (`successNotification`).
 */
+/* exported validarFechaIngreso, hideNotification */
+/* global addMovement, formatMoney, getMovementById, loadRemoteMovements, updateMovement */
 
 const MAX_MONTO = 22000000000.22;
 
@@ -68,7 +70,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             let [entero, decimal] = valor.split(',');
             if (entero) {
                 entero = entero.replace(/^0+(?=\d)/, '');
-                entero = entero.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+                entero = entero.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
             }
             if (decimal !== undefined) {
                 decimal = decimal.substring(0, 2);

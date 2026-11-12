@@ -5,6 +5,8 @@
  - `validarFecha()` valida la fecha y redirige con `?success=expense` cuando corresponde.
  - `hideError()` oculta notificaciones de error.
 */
+/* exported validarFecha, hideError */
+/* global addMovement, formatMoney, getMovementById, loadRemoteMovements, updateMovement */
 
 const MAX_MONTO = 22000000000.22;
 
@@ -71,7 +73,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             let [entero, decimal] = valor.split(',');
             if (entero) {
                 entero = entero.replace(/^0+(?=\d)/, '');
-                entero = entero.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+                entero = entero.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
             }
             if (decimal !== undefined) {
                 decimal = decimal.substring(0, 2);

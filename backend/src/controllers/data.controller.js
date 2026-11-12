@@ -1,4 +1,7 @@
 const db = require('../config/database');
+const { esOtroUsuario } = require('../middleware/auth');
+
+const FORBIDDEN = { message: 'No puedes acceder a los datos de otro usuario.' };
 
 const allowedResources = new Set(['movements', 'budgets', 'goals', 'backups']);
 const MAX_AMOUNT = 22000000000.22;
@@ -21,7 +24,8 @@ function assertAmountsWithinLimit(data) {
 exports.list = (req, res) => {
     try {
         assertResource(req.params.resource);
-        const rows = db.prepare('SELECT id, data FROM app_data WHERE resource = ? AND user_id = ? ORDER BY updated_at DESC').all(req.params.resource, req.params.userId);
+        if (esOtroUsuario(req, req.params.userId)) return res.status(403).json(FORBIDDEN);
+        const rows = db.prepare('SELECT id, data FROM app_data WHERE resource = ? AND user_id = ? ORDER BY updated_at DESC').all(req.params.resource, req.userId);
         res.json(rows.map(row => ({ ...JSON.parse(row.data), id: row.id })));
     } catch (error) { res.status(400).json({ message: error.message }); }
 };
@@ -30,10 +34,12 @@ exports.save = (req, res) => {
     try {
         const resource = req.params.resource;
         assertResource(resource);
-        const { userId, id, ...data } = req.body;
-        if (!userId || !id) return res.status(400).json({ message: 'Faltan usuario o identificador.' });
+        const { userId: bodyUserId, id, ...data } = req.body;
+        if (esOtroUsuario(req, bodyUserId)) return res.status(403).json(FORBIDDEN);
+        if (!id) return res.status(400).json({ message: 'Falta el identificador.' });
+        const userId = req.userId;
         const user = db.prepare('SELECT id FROM users WHERE id = ?').get(userId);
-        if (!user) return res.status(401).json({ message: 'La sesión no es válida en Render. Cierra sesión e inicia sesión nuevamente.' });
+        if (!user) return res.status(401).json({ message: 'Tu cuenta ya no existe en el servidor. Cierra sesión e inicia sesión nuevamente.' });
         assertAmountsWithinLimit(data);
         const serialized = JSON.stringify(data);
         const existing = db.prepare('SELECT id FROM app_data WHERE id = ? AND resource = ? AND user_id = ?').get(id, resource, userId);
@@ -49,8 +55,8 @@ exports.save = (req, res) => {
 exports.remove = (req, res) => {
     try {
         assertResource(req.params.resource);
-        const userId = (req.body || {}).userId || req.query.userId;
-        const result = db.prepare('DELETE FROM app_data WHERE id = ? AND resource = ? AND user_id = ?').run(req.params.id, req.params.resource, userId);
+        if (esOtroUsuario(req, (req.body || {}).userId) || esOtroUsuario(req, req.query.userId)) return res.status(403).json(FORBIDDEN);
+        const result = db.prepare('DELETE FROM app_data WHERE id = ? AND resource = ? AND user_id = ?').run(req.params.id, req.params.resource, req.userId);
         if (!result.changes) return res.status(404).json({ message: 'Registro no encontrado.' });
         res.json({ message: 'Registro eliminado.' });
     } catch (error) { res.status(400).json({ message: error.message }); }

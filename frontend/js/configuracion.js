@@ -4,6 +4,7 @@
  - `openModal()` y `closeModal()` abren/cierra el modal identificado por `passwordModal`.
  - Cierra el modal al hacer click fuera de este.
 */
+/* exported openModal */
 
 function openModal() {
     const modal = document.getElementById('passwordModal');

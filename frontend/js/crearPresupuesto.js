@@ -5,6 +5,8 @@
  - Muestra campos personalizados para periodo y categoría según selección.
  - Carga datos cuando se edita un presupuesto y guarda en localStorage.
 */
+/* exported saveBudget, hideError */
+/* global addBudget, getBudgetById, getBudgets, loadRemoteBudgets, updateBudget */
 
 const MAX_BUDGET_AMOUNT = 22000000000.22;
 
@@ -229,11 +231,6 @@ function formatMoney(value) {
     const parts = amount.split('.');
     parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, '.');
     return parts.join(',');
-}
-
-function formatAmountWithoutThousands(value) {
-    const amount = Number(value).toFixed(2);
-    return amount.replace('.', ',');
 }
 
 // Gestiona el autocompletado y registro de nuevas categorías personalizadas

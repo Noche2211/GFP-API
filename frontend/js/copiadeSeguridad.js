@@ -1,3 +1,5 @@
+/* exported openBackupDialog */
+/* global getBackups, getBudgets, getCurrentUser, getGoals, getMovements, loadRemoteBackups, loadRemoteBudgets, loadRemoteGoals, loadRemoteMovements, saveBackup */
 document.addEventListener('DOMContentLoaded', async () => {
     document.getElementById('backupForm')?.addEventListener('submit', handleBackupSubmit);
     try {
@@ -64,40 +66,6 @@ function buildAccountBackup() {
             goals: getGoals()
         }
     };
-}
-
-function buildBackupSections(types) {
-    const from = document.getElementById('backupDateFrom').value;
-    const to = document.getElementById('backupDateTo').value;
-    if (from && to && from > to) throw new Error('La fecha inicial no puede ser posterior a la fecha final.');
-    const sections = {};
-    if (types.includes('movements')) {
-        sections.movements = getMovements().filter(item => (!from || item.date >= from) && (!to || item.date <= to));
-    }
-    if (types.includes('budgets')) sections.budgets = getBudgets();
-    if (types.includes('goals')) sections.goals = getGoals();
-    return sections;
-}
-
-function buildCsv(sections) {
-    const lines = [];
-    Object.entries(sections).forEach(([name, rows]) => {
-        lines.push(name.toUpperCase());
-        if (!rows.length) {
-            lines.push('Sin registros', '');
-            return;
-        }
-        const columns = Object.keys(rows[0]);
-        lines.push(columns.join(','));
-        rows.forEach(row => lines.push(columns.map(column => csvEscape(row[column])).join(',')));
-        lines.push('');
-    });
-    return lines.join('\n');
-}
-
-function csvEscape(value) {
-    const text = value === null || value === undefined ? '' : String(value);
-    return /[",\n]/.test(text) ? `"${text.replace(/"/g, '""')}"` : text;
 }
 
 function renderBackups() {

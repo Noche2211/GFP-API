@@ -5,6 +5,7 @@
  - Actualmente `exportData` simula la exportación con un `alert`; reemplazar por lógica real si hay backend.
  - Cierra el modal al hacer click fuera del mismo.
 */
+/* global closeExportModal, formatMoney, getBudgetSpent, getBudgets, getGoals, getMovements, loadRemoteBudgets, loadRemoteGoals, loadRemoteMovements */
 
 let reportDirectoryHandle = null;
 
@@ -22,11 +23,11 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     window.showExportModal = function () {
         if (exportModal) exportModal.style.display = 'flex';
-    }
+    };
 
     window.closeExportModal = function () {
         if (exportModal) exportModal.style.display = 'none';
-    }
+    };
 
     window.chooseReportFolder = async function () {
         if (!window.showDirectoryPicker) {
@@ -40,7 +41,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         } catch (error) {
             if (error.name !== 'AbortError') alert('No se pudo seleccionar la carpeta.');
         }
-    }
+    };
 
     window.exportData = async function () {
         const format = document.getElementById('exportFormat')?.value || 'csv';
@@ -72,7 +73,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (format === 'pdf') await downloadReportPdf(sections, fileName);
         else await downloadReportCsv(sections, fileName);
         closeExportModal();
-    }
+    };
 
     // Close modal when clicking outside
     window.addEventListener('click', (event) => {
@@ -234,10 +235,6 @@ function renderGoal(goal) {
 
 function emptyReport(message) {
     return `<p class="empty-report">${message}</p>`;
-}
-
-function parseReportAmount(value) {
-    return Number(value) || 0;
 }
 
 function formatReportDate(value) {

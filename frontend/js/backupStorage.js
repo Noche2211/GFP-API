@@ -1,3 +1,5 @@
+/* exported loadRemoteBackups, saveBackup */
+/* global currentUserId, loadRemoteData, saveRemoteData */
 const BACKUP_STORAGE_KEY = 'gfpBackups';
 
 function getBackupStorageKey() {

@@ -1,7 +1,7 @@
 /**
  * Inicialización de tabla users.
  */
-const db = require("../config/database");
+const db = require('../config/database');
 
 db.exec(`
     CREATE TABLE IF NOT EXISTS users (
@@ -16,7 +16,11 @@ db.exec(`
 `);
 
 for (const column of ['birth_date', 'gender']) {
-    try { db.exec(`ALTER TABLE users ADD COLUMN ${column} TEXT`); } catch {}
+    try {
+        db.exec(`ALTER TABLE users ADD COLUMN ${column} TEXT`);
+    } catch {
+        // La columna ya existe en bases de datos creadas con versiones anteriores
+    }
 }
 
 db.exec(`

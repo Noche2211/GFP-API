@@ -5,6 +5,8 @@
  - Lee parámetros de la URL para mostrar notificaciones de éxito (`?success=income|expense`) o para abrir la vista de selección.
  - Provee `hideNotification()` local para ocultar toasts.
 */
+/* exported closeSelectionView */
+/* global deleteMovement, formatMoney, formatMovementCategory, formatMovementDate, getMovements, loadRemoteMovements */
 
 let movementToDeleteId = null;
 

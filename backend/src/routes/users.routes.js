@@ -1,35 +1,37 @@
 /**
  * Define rutas CRUD de usuarios.
+ * Crear cuenta e iniciar sesión son públicas; el resto exige token de sesión.
  */
 
-const express = require("express");
+const express = require('express');
 const router = express.Router();
 
-const controller = require("../controllers/users.controller");
+const controller = require('../controllers/users.controller');
+const { requireAuth } = require('../middleware/auth');
 
 /**
  * CREATE
  */
-router.post("/", controller.createUser);
+router.post('/', controller.createUser);
 
 /**
  * LOGIN
  */
-router.post("/login", controller.loginUser);
+router.post('/login', controller.loginUser);
 
 /**
- * READ
+ * READ (solo el usuario autenticado)
  */
-router.get("/", controller.getUsers);
+router.get('/', requireAuth, controller.getUsers);
 
 /**
  * UPDATE
  */
-router.put("/:id", controller.updateUser);
+router.put('/:id', requireAuth, controller.updateUser);
 
 /**
  * DELETE
  */
-router.delete("/:id", controller.deleteUser);
+router.delete('/:id', requireAuth, controller.deleteUser);
 
 module.exports = router;

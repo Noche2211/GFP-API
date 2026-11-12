@@ -1,3 +1,5 @@
+/* exported loadRemoteMovements, addMovement, getMovementById, updateMovement, deleteMovement, getMovementTotals, formatMoney, formatMovementDate, normalizeCategory, formatMovementCategory */
+/* global currentUserId, deleteRemoteData, loadRemoteData, saveRemoteData */
 const MOVEMENT_STORAGE_KEY = 'gfpMovements';
 
 function getMovementStorageKey() {

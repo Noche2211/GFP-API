@@ -4,6 +4,7 @@
  - `sendRecoveryLink()` muestra una notificación simulada de envío y luego la oculta.
  - `hideNotification()` oculta el toast `recoveryNotification`.
 */
+/* exported sendRecoveryLink */
 
 function sendRecoveryLink() {
     const notification = document.getElementById('recoveryNotification');

@@ -2,16 +2,19 @@
  * users.controller.js
  * CRUD de usuarios (Versión Nativa)
  */
-const db = require("../config/database");
-const bcrypt = require("bcryptjs");
+const db = require('../config/database');
+const bcrypt = require('bcryptjs');
+const { crearToken, esOtroUsuario } = require('../middleware/auth');
+
+const FORBIDDEN = { message: 'No puedes modificar la cuenta de otro usuario.' };
 
 /**
  * Traduce el error de correo duplicado (restricción UNIQUE de users.email)
  * a un mensaje entendible para el usuario.
  */
 function getUserErrorMessage(error) {
-    if (String(error.message).includes("UNIQUE constraint failed: users.email")) {
-        return "Este correo ya está registrado.";
+    if (String(error.message).includes('UNIQUE constraint failed: users.email')) {
+        return 'Este correo ya está registrado.';
     }
     return error.message;
 }
@@ -21,10 +24,10 @@ exports.createUser = (req, res) => {
         const { name, email, password } = req.body;
         const hashedPassword = bcrypt.hashSync(password, 10);
 
-        const stmt = db.prepare(`INSERT INTO users (name, email, password) VALUES (?, ?, ?)`);
+        const stmt = db.prepare('INSERT INTO users (name, email, password) VALUES (?, ?, ?)');
         const info = stmt.run(name, email, hashedPassword);
 
-        res.status(201).json({ message: "Usuario creado correctamente", id: info.lastInsertRowid });
+        res.status(201).json({ message: 'Usuario creado correctamente', id: info.lastInsertRowid, token: crearToken(info.lastInsertRowid) });
     } catch (error) {
         res.status(400).json({ message: getUserErrorMessage(error) });
     }
@@ -33,19 +36,19 @@ exports.createUser = (req, res) => {
 exports.loginUser = (req, res) => {
     try {
         const { email, password } = req.body;
-        const stmt = db.prepare(`SELECT id, name, email, password, birth_date, gender FROM users WHERE email = ?`);
+        const stmt = db.prepare('SELECT id, name, email, password, birth_date, gender FROM users WHERE email = ?');
         const user = stmt.get(email);
 
         if (!user) {
-            return res.status(400).json({ message: "Usuario o contraseña inválidos" });
+            return res.status(400).json({ message: 'Usuario o contraseña inválidos' });
         }
 
         const isValid = bcrypt.compareSync(password, user.password);
         if (!isValid) {
-            return res.status(400).json({ message: "Usuario o contraseña inválidos" });
+            return res.status(400).json({ message: 'Usuario o contraseña inválidos' });
         }
 
-        res.json({ id: user.id, name: user.name, email: user.email, birthDate: user.birth_date, gender: user.gender });
+        res.json({ id: user.id, name: user.name, email: user.email, birthDate: user.birth_date, gender: user.gender, token: crearToken(user.id) });
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
@@ -53,8 +56,9 @@ exports.loginUser = (req, res) => {
 
 exports.getUsers = (req, res) => {
     try {
-        const stmt = db.prepare(`SELECT id, name, email, created_at FROM users`);
-        const rows = stmt.all();
+        // Solo devuelve el usuario autenticado; la lista completa expondría los correos de todos
+        const stmt = db.prepare('SELECT id, name, email, created_at FROM users WHERE id = ?');
+        const rows = stmt.all(req.userId);
         res.json(rows);
     } catch (error) {
         res.status(500).json({ message: error.message });
@@ -64,46 +68,47 @@ exports.getUsers = (req, res) => {
 exports.updateUser = (req, res) => {
     try {
         const { id } = req.params;
+        if (esOtroUsuario(req, id)) return res.status(403).json(FORBIDDEN);
         const { name, email, password, birthDate, gender } = req.body;
         const updates = [];
         const params = [];
 
         if (name !== undefined && email !== undefined) {
-            updates.push("name = ?", "email = ?");
+            updates.push('name = ?', 'email = ?');
             params.push(name, email);
         } else if (name !== undefined) {
-            updates.push("name = ?");
+            updates.push('name = ?');
             params.push(name);
         } else if (email !== undefined) {
-            updates.push("email = ?");
+            updates.push('email = ?');
             params.push(email);
         }
 
         if (password) {
             const hashedPassword = bcrypt.hashSync(password, 10);
-            updates.push("password = ?");
+            updates.push('password = ?');
             params.push(hashedPassword);
         }
 
         if (birthDate !== undefined) {
-            updates.push("birth_date = ?");
+            updates.push('birth_date = ?');
             params.push(birthDate || null);
         }
 
         if (gender !== undefined) {
-            updates.push("gender = ?");
+            updates.push('gender = ?');
             params.push(gender || null);
         }
 
         if (updates.length === 0) {
-            return res.status(400).json({ message: "No se enviaron campos válidos para actualizar." });
+            return res.status(400).json({ message: 'No se enviaron campos válidos para actualizar.' });
         }
 
         params.push(id);
         const stmt = db.prepare(`UPDATE users SET ${updates.join(', ')} WHERE id = ?`);
         stmt.run(...params);
 
-        res.json({ message: "Usuario actualizado correctamente" });
+        res.json({ message: 'Usuario actualizado correctamente' });
     } catch (error) {
         res.status(400).json({ message: getUserErrorMessage(error) });
     }
@@ -112,10 +117,11 @@ exports.updateUser = (req, res) => {
 exports.deleteUser = (req, res) => {
     try {
         const { id } = req.params;
-        const stmt = db.prepare(`DELETE FROM users WHERE id = ?`);
+        if (esOtroUsuario(req, id)) return res.status(403).json(FORBIDDEN);
+        const stmt = db.prepare('DELETE FROM users WHERE id = ?');
         stmt.run(id);
         
-        res.json({ message: "Usuario eliminado correctamente" });
+        res.json({ message: 'Usuario eliminado correctamente' });
     } catch (error) {
         res.status(400).json({ message: error.message });
     }

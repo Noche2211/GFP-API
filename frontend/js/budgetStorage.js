@@ -2,6 +2,8 @@
     frontend/js/budgetStorage.js
     Propósito: Lógica de la aplicación y comportamiento del usuario para esta página.
 */
+/* exported loadRemoteBudgets, addBudget, updateBudget, deleteBudget, getBudgetById, getBudgetSpent */
+/* global currentUserId, deleteRemoteData, getMovements, loadRemoteData, normalizeCategory, parseDateString, saveRemoteData */
 const BUDGET_STORAGE_KEY = 'gfpBudgets';
 
 function getBudgetStorageKey() {

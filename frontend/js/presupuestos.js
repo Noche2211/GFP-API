@@ -5,6 +5,7 @@
  - Añade comportamiento al botón `+` (`newBudgetBtn`) para redirigir a `crearPresupuesto.html`.
  - `hideNotification()` oculta el toast de éxito.
 */
+/* global deleteBudget, getBudgets, loadRemoteBudgets */
 
 let budgetToDeleteId = null;
 

@@ -6,40 +6,41 @@
  - Provee helpers para ocultar notificaciones por id.
  Este archivo debe ser incluido antes de los scripts específicos de página.
 */
+/* exported hideNotification */
 
 document.addEventListener('DOMContentLoaded', () => {
-    const btn = document.getElementById("menuBtn");
-    const menu = document.getElementById("sideMenu");
-    const icon = document.getElementById("menuIcon");
+    const btn = document.getElementById('menuBtn');
+    const menu = document.getElementById('sideMenu');
+    const icon = document.getElementById('menuIcon');
 
     if (btn && menu && icon) {
-        btn.addEventListener("click", () => {
-            menu.classList.toggle("open");
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('open');
 
-            if (menu.classList.contains("open")) {
-                icon.src = "../img/menuAbierto.svg";
+            if (menu.classList.contains('open')) {
+                icon.src = '../img/menuAbierto.svg';
             } else {
-                icon.src = "../img/menuCerrado.svg";
+                icon.src = '../img/menuCerrado.svg';
             }
         });
     }
 
-    const menuItems = document.querySelectorAll(".menu-options li");
+    const menuItems = document.querySelectorAll('.menu-options li');
     if (menuItems) {
         menuItems.forEach(item => {
-            item.addEventListener("click", () => {
-                menuItems.forEach(i => i.classList.remove("active"));
-                item.classList.add("active");
+            item.addEventListener('click', () => {
+                menuItems.forEach(i => i.classList.remove('active'));
+                item.classList.add('active');
             });
         });
     }
 
-    const footerIcons = document.querySelectorAll(".bottom-bar .icon");
+    const footerIcons = document.querySelectorAll('.bottom-bar .icon');
     if (footerIcons) {
         footerIcons.forEach(icon => {
-            icon.addEventListener("click", () => {
-                footerIcons.forEach(i => i.classList.remove("active"));
-                icon.classList.add("active");
+            icon.addEventListener('click', () => {
+                footerIcons.forEach(i => i.classList.remove('active'));
+                icon.classList.add('active');
             });
         });
     }

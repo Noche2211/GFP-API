@@ -1,3 +1,5 @@
+/* exported loadRemoteGoals, addGoal, updateGoal, deleteGoal, getGoalById, parseGoalAmount, formatGoalMoney */
+/* global currentUserId, deleteRemoteData, loadRemoteData, saveRemoteData */
 const GOAL_STORAGE_KEY = 'gfpGoals';
 
 function getStorageUserKey() {

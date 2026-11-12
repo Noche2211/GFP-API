@@ -1,3 +1,5 @@
+/* exported saveRemoteData, loadRemoteData, deleteRemoteData */
+/* global API_BASE_URL, authHeaders */
 const DATA_API_BASE_URL = `${API_BASE_URL}/api/data`;
 
 async function readApiResponse(response, fallbackMessage) {
@@ -9,7 +11,7 @@ async function readApiResponse(response, fallbackMessage) {
     if (!response.ok) {
         if (response.status === 401) {
             localStorage.removeItem('currentUser');
-            throw new Error('Tu sesión ya no es válida en Render. Inicia sesión nuevamente para guardar tus datos.');
+            throw new Error(result?.message || 'Tu sesión no es válida o expiró. Inicia sesión nuevamente para guardar tus datos.');
         }
         if (response.status === 404) {
             throw new Error(`${fallbackMessage} Render no tiene disponible esta ruta. Verifica que el último despliegue incluya la API de datos.`);
@@ -33,7 +35,7 @@ async function saveRemoteData(resource, data) {
     if (!userId) throw new Error('Inicia sesión para guardar tus datos.');
     const response = await fetch(`${DATA_API_BASE_URL}/${resource}`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: authHeaders({ 'Content-Type': 'application/json' }),
         body: JSON.stringify({ ...data, userId })
     });
     return readApiResponse(response, 'No se pudieron guardar los datos.');
@@ -42,15 +44,16 @@ async function saveRemoteData(resource, data) {
 async function loadRemoteData(resource) {
     const userId = currentUserId();
     if (!userId) return [];
-    const response = await fetch(`${DATA_API_BASE_URL}/${resource}/${userId}`);
+    const response = await fetch(`${DATA_API_BASE_URL}/${resource}/${userId}`, { headers: authHeaders() });
     return readApiResponse(response, 'No se pudieron cargar los datos.');
 }
 
 async function deleteRemoteData(resource, id) {
     const userId = currentUserId();
     if (!userId) return;
-    const response = await fetch(`${DATA_API_BASE_URL}/${resource}/${encodeURIComponent(id)}?userId=${encodeURIComponent(userId)}`, {
-        method: 'DELETE'
+    const response = await fetch(`${DATA_API_BASE_URL}/${resource}/${encodeURIComponent(id)}`, {
+        method: 'DELETE',
+        headers: authHeaders()
     });
     return readApiResponse(response, 'No se pudo eliminar el registro.');
 }

@@ -6,6 +6,8 @@
  * - Mantiene la sesión en localStorage.
  * - Actualiza y elimina usuario con PUT /api/users/:id y DELETE /api/users/:id.
  */
+/* exported registerUser, loginUser, hideNotification, updateCurrentUser, deleteCurrentUser, changePassword */
+/* global API_BASE_URL, authHeaders, closeModal */
 const CURRENT_USER_KEY = 'currentUser';
 const USERS_API_URL = `${API_BASE_URL}/api/users`;
 
@@ -77,7 +79,7 @@ async function registerUser() {
             throw new Error(data.message || 'Error al crear usuario');
         }
 
-        setCurrentUser({ id: data.id, name, email });
+        setCurrentUser({ id: data.id, name, email, token: data.token });
         showRegisterMessage('Cuenta creada correctamente, redirigiendo a login...', false);
 
         setTimeout(() => {
@@ -205,7 +207,7 @@ async function updateCurrentUser() {
     try {
         const response = await fetch(`${USERS_API_URL}/${user.id}`, {
             method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
+            headers: authHeaders({ 'Content-Type': 'application/json' }),
             body: JSON.stringify({ name, email, birthDate, gender })
         });
 
@@ -235,7 +237,8 @@ async function deleteCurrentUser() {
 
     try {
         const response = await fetch(`${USERS_API_URL}/${user.id}`, {
-            method: 'DELETE'
+            method: 'DELETE',
+            headers: authHeaders()
         });
 
         const data = await response.json();
@@ -289,7 +292,7 @@ async function changePassword() {
 
         const updateResponse = await fetch(`${USERS_API_URL}/${user.id}`, {
             method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
+            headers: authHeaders({ 'Content-Type': 'application/json' }),
             body: JSON.stringify({ password: newPassword })
         });
 

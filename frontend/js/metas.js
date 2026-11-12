@@ -4,6 +4,7 @@
  - Detecta `?success=goal` en la URL y muestra un toast de éxito (`successNotification`).
  - `hideNotification()` oculta el toast.
 */
+/* global deleteGoal, formatGoalMoney, getGoals, loadRemoteGoals */
 
 document.addEventListener('DOMContentLoaded', async () => {
     const params = new URLSearchParams(window.location.search);

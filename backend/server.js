@@ -3,17 +3,17 @@
  */
 
 // Carga variables de entorno para configuración sensible
-require("dotenv").config();
+require('dotenv').config();
 
 // Inicializa la conexión y configuración de la base de datos
-require("./src/database/init");
+require('./src/database/init');
 
 // Importa la instancia de la aplicación Express
-const app = require("./src/app");
+const app = require('./src/app');
 
 // Importa middleware para habilitar el intercambio de recursos de origen cruzado (CORS)
-const cors = require("cors");
-const express = require("express");
+const cors = require('cors');
+const express = require('express');
 
 // Habilita el acceso desde diferentes orígenes para el frontend
 app.use(cors());

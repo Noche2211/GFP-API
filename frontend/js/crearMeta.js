@@ -5,6 +5,8 @@
  - `validarFecha()`: valida que la fecha objetivo no sea anterior a hoy y muestra `errorNotification` si es inválida.
  - `hideError()`: oculta el mensaje de error.
 */
+/* exported hideError, validarFecha */
+/* global addGoal, formatGoalMoney, getGoalById, loadRemoteGoals, parseGoalAmount, updateGoal */
 
 const MAX_MONTO = 22000000000.22;
 
@@ -23,7 +25,7 @@ function formatMoneda(input) {
             let [entero, decimal] = valor.split(',');
             if (entero) {
                 entero = entero.replace(/^0+(?=\d)/, '');
-                entero = entero.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+                entero = entero.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
             }
             if (decimal !== undefined) {
                 decimal = decimal.substring(0, 2);
@@ -50,7 +52,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     formatMoneda(montoObjetivo);
     formatMoneda(montoAhorrado);
 
-    const fechaInput = document.getElementById('fecha');
     await loadRemoteGoals();
     initializeGoalEditMode();
 });
